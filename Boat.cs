@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Boat : CharacterBody2D
@@ -18,9 +19,6 @@ public partial class Boat : CharacterBody2D
 	[Export] public int BurstAmount = 3;
 	[Export] public float ArrowCooldown = 0.5f;
 	private float _arrowCooldownTime = 0f;
-	[Export] public float ArrowDamage = 1f;
-	[Export] public Sprite2D Sprite;
-
 	private bool _sails = false;
 	private bool _lights = true;
 	private bool _oars = false;

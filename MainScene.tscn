@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="3_a814b"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
 [ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="5_p5x2j"]
-[ext_resource type="Script" uid="uid://c2wfdxjlpxnw" path="res://RuneIsland.cs" id="6_hbc2u"]
+[ext_resource type="Script" path="res://RuneIsland.cs" id="6_hbc2u"]
 [ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="7_5crlr"]
 [ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
-[ext_resource type="Script" uid="uid://bo1x27ftihdx6" path="res://MainIsland.cs" id="8_8xkvn"]
+[ext_resource type="Script" path="res://MainIsland.cs" id="8_8xkvn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
 radius = 26.0
@@ -57,6 +57,7 @@ scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_uxrcv")
 
 [node name="Ship" parent="Boat" unique_id=616131769 instance=ExtResource("5_p5x2j")]
+position = Vector2(0, -1)
 
 [node name="Islands" type="Node2D" parent="." unique_id=1133923920]
 
