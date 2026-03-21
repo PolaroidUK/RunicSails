@@ -19,14 +19,20 @@ public partial class Boat : CharacterBody2D
 	[Export] public int BurstAmount = 3;
 	[Export] public float ArrowCooldown = 0.5f;
 	private float _arrowCooldownTime = 0f;
-	private bool _sails = false;
+	private bool _sails = true;
 	private bool _lights = true;
 	private bool _oars = false;
 
 	[Export] public Node2D Ship;
 	
 	[Export] public PackedScene arrow;
-	
+	[Export] private GameUI ui;
+	public override void _Ready()
+	{
+		base._Ready();
+		ui.RuneMade += ActivateRune;
+	}
+
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -50,6 +56,7 @@ public partial class Boat : CharacterBody2D
 		{
 			ShootArrow();
 		}
+		
 	}
 
 	[Export] public LineEdit runeNumberInput;
@@ -60,9 +67,11 @@ public partial class Boat : CharacterBody2D
 	}
 	public void ActivateRune(int runeID)
 	{
-		switch (runeID)
+		Runes rune = (Runes)runeID;
+		GD.Print("rune made :"+rune);
+		switch (rune)
 		{
-			case 1:
+			case Runes.Sails:
 				if (_sails)
 				{
 					_sails = false;
@@ -74,9 +83,13 @@ public partial class Boat : CharacterBody2D
 					DropSails();
 				}
 				break;
-			case 2:
+			case Runes.Oars:
 				_oars = !_oars;
 				break;
+			case Runes.None:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
 		RecalculateSpeed();
 		Ship.Call("update_visuals", Speed, _lights);

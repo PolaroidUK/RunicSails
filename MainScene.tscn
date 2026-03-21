@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://0rgypnempnlw"]
 
+[ext_resource type="PackedScene" path="res://gustav/gustav-pub/SeaEnvironment.tscn" id="1_p5x2j"]
 [ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_rpqi1"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="2_hbc2u"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
 [ext_resource type="Script" uid="uid://c2wfdxjlpxnw" path="res://RuneIsland.cs" id="6_hbc2x"]
 [ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
 [ext_resource type="Script" uid="uid://bo1x27ftihdx6" path="res://MainIsland.cs" id="8_8xkvn"]
-[ext_resource type="PackedScene" uid="uid://c1eu5cwu08qcx" path="res://UI.tscn" id="11_p5x2j"]
+[ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="11_p5x2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a814b"]
 size = Vector2(127, 127)
@@ -21,8 +22,11 @@ position = Vector2(581, 130)
 scale = Vector2(4.1835938, 3.7690039)
 texture = ExtResource("1_rpqi1")
 
-[node name="Boat" parent="." unique_id=1606016725 instance=ExtResource("2_hbc2u")]
+[node name="Boat" parent="." unique_id=1606016725 node_paths=PackedStringArray("ui") instance=ExtResource("2_hbc2u")]
 position = Vector2(44.32257, 56.672943)
+ui = NodePath("../CanvasLayer")
+
+[node name="Environment" parent="Boat" unique_id=163969480 instance=ExtResource("1_p5x2j")]
 
 [node name="Islands" type="Node2D" parent="." unique_id=1133923920]
 

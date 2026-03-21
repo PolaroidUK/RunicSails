@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://c7kfedb3hao1f"]
 
 [ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid.cs" id="1_3b2b5"]
+[ext_resource type="Script" uid="uid://b3p8bhkxvw76v" path="res://GameUI.cs" id="1_g6l6n"]
 [ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://HexNode.cs" id="2_g6l6n"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1099925823]
+script = ExtResource("1_g6l6n")
 
 [node name="Control" type="Control" parent="." unique_id=637561152]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 135.0
@@ -28,7 +31,7 @@ offset_top = 22.0
 offset_right = 53.5
 offset_bottom = 53.0
 
-[node name="RuneHexGrid" type="Control" parent="." unique_id=319203755]
+[node name="RuneHexGrid" type="Control" parent="." unique_id=319203755 node_paths=PackedStringArray("ui")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -40,6 +43,7 @@ offset_top = -324.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_3b2b5")
+ui = NodePath("..")
 
 [node name="HexNode" type="Control" parent="RuneHexGrid" unique_id=968749513]
 anchors_preset = 0

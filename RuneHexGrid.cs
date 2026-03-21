@@ -17,11 +17,12 @@ public partial class RuneHexGrid : Control
     private readonly Dictionary<Vector2I, HexNode> _nodeMap = [];
     private readonly List<(HexNode A, HexNode B)> _connections = [];
     private readonly Dictionary<LineKey, int> _lineBitIndices = [];
-    private readonly Dictionary<string, ulong> _knownPatterns = [];
+    private readonly Dictionary<Runes, ulong> _knownPatterns = [];
     private readonly List<HexNode> _selectedPath = [];
 
     private bool _isDragging;
 
+    [Export] private GameUI ui;
     public override async void _Ready()
     {
         ClipContents = false;
@@ -265,9 +266,13 @@ public partial class RuneHexGrid : Control
             return;
 
         ulong patternMask = BuildPatternMask();
-        string matched = FindMatchingPattern(patternMask);
-        GD.Print(matched);
-
+        Runes matched = FindMatchingPattern(patternMask);
+        if (matched != Runes.None)
+        {
+            
+            GD.Print(matched);
+            ui.EmitSignal(GameUI.SignalName.RuneMade,(int)matched);
+        }
         int[] nodeIds = _selectedPath.Select(x => x.Id).ToArray();
 
         var linePairs = new Godot.Collections.Array<Vector2I>();
@@ -322,7 +327,7 @@ public partial class RuneHexGrid : Control
         return mask;
     }
 
-    private string? FindMatchingPattern(ulong mask)
+    private Runes FindMatchingPattern(ulong mask)
     {
         foreach (var kvp in _knownPatterns)
         {
@@ -330,7 +335,7 @@ public partial class RuneHexGrid : Control
                 return kvp.Key;
         }
 
-        return null;
+        return Runes.None;
     }
 
     public override void _Notification(int what)
@@ -356,13 +361,16 @@ public partial class RuneHexGrid : Control
 
     private void RegisterKnownPatterns()
     {
-        _knownPatterns["Triangle"] = CreateMaskFromEdges(
-            new LineKey(0, 1),
+        _knownPatterns[Runes.Sails] = CreateMaskFromEdges(
+            new LineKey(0, 3),
             new LineKey(1, 3),
-            new LineKey(0, 3)
+            new LineKey(2, 3),
+            new LineKey(4, 3),
+            new LineKey(5, 3),
+            new LineKey(6, 3)
         );
 
-        _knownPatterns["Fork"] = CreateMaskFromEdges(
+        _knownPatterns[Runes.Oars] = CreateMaskFromEdges(
             new LineKey(0, 1),
             new LineKey(1, 2),
             new LineKey(1, 4)
