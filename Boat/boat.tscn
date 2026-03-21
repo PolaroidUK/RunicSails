@@ -12,9 +12,10 @@ height = 105.9
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxrcv"]
 size = Vector2(29.49265, 23.662956)
 
-[node name="Boat" type="CharacterBody2D" unique_id=1606016725 node_paths=PackedStringArray("Sprite")]
+[node name="Boat" type="CharacterBody2D" unique_id=1606016725 node_paths=PackedStringArray("Sprite", "Ship")]
 script = ExtResource("1_reikl")
 Sprite = NodePath("Sprite")
+Ship = NodePath("Ship")
 arrow = ExtResource("2_wob0g")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1634597975]

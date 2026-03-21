@@ -56,7 +56,7 @@ public partial class Boat : CharacterBody2D
 	
 	public void TakeDebugInput()
 	{
-		ActivateRune(Convert.ToInt32(runeNumberInput.Text));
+		//ActivateRune(Convert.ToInt32(runeNumberInput.Text));
 	}
 	public void ActivateRune(int runeID)
 	{
