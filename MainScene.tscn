@@ -2,14 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_rpqi1"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="2_hbc2u"]
-[ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://Arrow/arrow.tscn" id="3_a814b"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
-[ext_resource type="Script" path="res://HexNode.cs" id="6_hbc2u"]
 [ext_resource type="Script" uid="uid://c2wfdxjlpxnw" path="res://RuneIsland.cs" id="6_hbc2x"]
-[ext_resource type="Script" path="res://RuneHexGrid.cs" id="7_5crlr"]
-[ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="7_5crlx"]
 [ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
 [ext_resource type="Script" uid="uid://bo1x27ftihdx6" path="res://MainIsland.cs" id="8_8xkvn"]
+[ext_resource type="PackedScene" uid="uid://c1eu5cwu08qcx" path="res://UI.tscn" id="11_p5x2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a814b"]
 size = Vector2(127, 127)
@@ -221,48 +218,4 @@ shape = SubResource("RectangleShape2D_a814b")
 [node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D13" unique_id=1779515942]
 texture = ExtResource("4_uxrcv")
 
-[node name="Arrow" parent="." unique_id=1017168830 instance=ExtResource("3_a814b")]
-position = Vector2(-97, 7)
-
-[node name="Monster2" parent="." unique_id=583600090 instance=ExtResource("7_5crlx")]
-position = Vector2(-337, -2)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=48547811]
-
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=1752753950]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 135.0
-offset_top = 32.0
-offset_right = 175.0
-offset_bottom = 72.0
-
-[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=875865241]
-layout_mode = 0
-offset_left = -25.0
-offset_top = -12.0
-offset_right = 65.0
-offset_bottom = 19.0
-text = "InputRune"
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control" unique_id=1365668060]
-layout_mode = 0
-offset_left = -15.0
-offset_top = 22.0
-offset_right = 53.5
-offset_bottom = 53.0
-
-[node name="RuneHexGrid" type="Control" parent="CanvasLayer" unique_id=753535251]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 250.0
-offset_right = 576.0
-offset_bottom = 324.0
-script = ExtResource("7_5crlr")
-
-[node name="HexNode" type="Control" parent="CanvasLayer/RuneHexGrid" unique_id=1420234114]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_hbc2u")
-metadata/_edit_group_ = true
+[node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("11_p5x2j")]
