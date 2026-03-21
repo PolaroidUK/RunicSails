@@ -1,18 +1,19 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
 public static class CodeAnimations
 {
-    // Sorry not sorry
-    public static async void DamageBlink(float duration, int blinks, Sprite2D sprite, Color damageColor, Color baseColor)
+    public static void DamageBlink(
+        float duration, 
+        int blinks, 
+        Sprite2D sprite, 
+        Color damageColor, 
+        Color baseColor)
     {
+        Tween tween = sprite.GetTree().CreateTween();
         for (int i = 0; i < blinks; i++)
         {
-            sprite.Modulate = damageColor;
-            await Task.Delay(TimeSpan.FromSeconds(duration));
-            sprite.Modulate = baseColor;
-            await Task.Delay(TimeSpan.FromSeconds(duration));
+            tween.TweenProperty(sprite, "modulate", damageColor, duration).SetTrans(Tween.TransitionType.Sine);
+            tween.TweenProperty(sprite, "modulate", baseColor, duration).SetTrans(Tween.TransitionType.Sine);
         }
     }
 }
