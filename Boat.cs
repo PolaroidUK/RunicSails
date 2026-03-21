@@ -9,6 +9,12 @@ public partial class Boat : CharacterBody2D
 	public const float rotationSpeed = 0.01f;
 	private float wantedDirection;
 	private Vector2 currentDirection = Vector2.Up;
+
+	[Export] public float Health = 100f;
+	[Export] public Color DamageColorMod = new Color(1f, 0f, 0f, 1f);
+	private Color _baseColorMod = new Color(1f, 1f, 1f, 1f);
+	[Export] public float ArrowDamage = 1f;
+	[Export] public Sprite2D Sprite;
 	
 	[Export] public PackedScene arrow;
 	public override void _Process(double delta)
@@ -33,6 +39,7 @@ public partial class Boat : CharacterBody2D
 		if (Input.IsActionPressed("ui_accept"))
 		{
 			Arrow newArrow = arrow.Instantiate<Arrow>();
+			newArrow.SetDamage(ArrowDamage);
 			newArrow.GlobalPosition = GlobalPosition;
 			newArrow.Rotation = -Mathf.Pi/2 +Rotation;
 			GetParent().AddChild(newArrow);
@@ -63,5 +70,15 @@ public partial class Boat : CharacterBody2D
 	public void HitSomething(Node2D body)
 	{
 		Speed = 0f;
+	}
+
+	public void Damage(float damage)
+	{
+		Health -= damage;
+		CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColorMod, _baseColorMod);
+		if (Health <= 0)
+		{
+			QueueFree();
+		}
 	}
 }
