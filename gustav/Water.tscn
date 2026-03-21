@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bodunnk2d48c3"]
+
+[ext_resource type="Shader" uid="uid://opxkx5u5ixga" path="res://gustav-pub/shaders/water.gdshader" id="1_yvljb"]
+[ext_resource type="Texture2D" uid="uid://bysqi67gv287m" path="res://icon.svg" id="2_n0824"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sricd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ftvuw"]
+noise = SubResource("FastNoiseLite_sricd")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0877r"]
+shader = ExtResource("1_yvljb")
+shader_parameter/noise = SubResource("NoiseTexture2D_ftvuw")
+shader_parameter/color = Color(0, 0.42301753, 0.48594153, 0.5019608)
+shader_parameter/speed = 0.02
+shader_parameter/strength = 0.1
+
+[node name="Water" type="Sprite2D" unique_id=274107108]
+material = SubResource("ShaderMaterial_0877r")
+texture = ExtResource("2_n0824")
