@@ -6,9 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqjb0"]
 size = Vector2(129, 132)
 
-[node name="Monster" type="Node2D" unique_id=583600090]
-
-[node name="Monster" type="Area2D" parent="." unique_id=479097499 node_paths=PackedStringArray("Sprite")]
+[node name="Monster" type="Area2D" unique_id=678498706 node_paths=PackedStringArray("Sprite")]
 scale = Vector2(1.5, 1.5)
 collision_layer = 3
 collision_mask = 3
@@ -17,10 +15,10 @@ Damage = 20.0
 Sprite = NodePath("Icon")
 metadata/_edit_group_ = true
 
-[node name="Icon" type="Sprite2D" parent="Monster" unique_id=1858022793]
+[node name="Icon" type="Sprite2D" parent="." unique_id=1858022793]
 modulate = Color(1, 0.2784314, 0.18431373, 1)
 texture = ExtResource("2_h3emb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1204225495]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1204225495]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_mqjb0")

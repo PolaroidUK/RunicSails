@@ -157,6 +157,7 @@ public partial class Boat : CharacterBody2D
 		{
 			Arrow newArrow = arrow.Instantiate<Arrow>();
 			newArrow.SetDamage(ArrowDamage);
+			newArrow.SetType(Monster.EMonster.Fish);
 			newArrow.GlobalPosition = GlobalPosition;
 			var rng = new RandomNumberGenerator();
 			// Bagbord

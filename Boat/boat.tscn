@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2b0on40cccq8"]
 
 [ext_resource type="Script" uid="uid://dwnnpacba40nh" path="res://Boat.cs" id="1_reikl"]
-[ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="2_wob0g"]
+[ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://Arrow/arrow.tscn" id="2_wob0g"]
 [ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="3_57yac"]
 [ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="4_oew0k"]
 

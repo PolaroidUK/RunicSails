@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://by6lsufeojhqm"]
+
+[ext_resource type="Script" uid="uid://voplo7lb3hdp" path="res://Arrow/Arrow.cs" id="1_2ndhl"]
+[ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="2_acd0x"]
+[ext_resource type="Texture2D" uid="uid://bfh4k048yme5k" path="res://Arrow/Arrow.png" id="2_n26w0"]
+[ext_resource type="Texture2D" uid="uid://eu2hrf4eu485" path="res://Arrow/Fish.png" id="3_n26w0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a814b"]
+radius = 7.0
+
+[node name="Arrow" type="RigidBody2D" unique_id=1017168830 node_paths=PackedStringArray("Sprite")]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_2ndhl")
+Sprite = NodePath("Icon")
+ArrowTexture = ExtResource("2_n26w0")
+FishTexture = ExtResource("3_n26w0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38326268]
+shape = SubResource("CapsuleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1678891878]
+position = Vector2(0, -1)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_acd0x")
