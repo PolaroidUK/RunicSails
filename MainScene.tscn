@@ -3,30 +3,60 @@
 [ext_resource type="PackedScene" path="res://gustav/gustav-pub/SeaEnvironment.tscn" id="1_p5x2j"]
 [ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_rpqi1"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="2_hbc2u"]
-[ext_resource type="PackedScene" path="res://Monster/MonsterSpawner.tscn" id="9_8xkvn"]
+[ext_resource type="Shader" uid="uid://rejo2vapifp3" path="res://gustav/ship/ripple.gdshader" id="2_torvr"]
+[ext_resource type="PackedScene" uid="uid://dbgrrrq8kehs4" path="res://Islands.tscn" id="8_hbc2u"]
+[ext_resource type="PackedScene" uid="uid://dn602mxxl5dth" path="res://Monster/MonsterSpawner.tscn" id="9_8xkvn"]
+[ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="10_8xkvn"]
 [ext_resource type="PackedScene" path="res://Monster/SpawnPoint.tscn" id="10_p5x2j"]
 [ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="11_p5x2j"]
 [ext_resource type="AudioStream" uid="uid://drmtce6gq6tg2" path="res://soundeffects/sea.mp3" id="11_yvb8b"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8xkvn"]
+frequency = 0.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p5x2j"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_8xkvn")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvb8b"]
+shader = ExtResource("2_torvr")
+shader_parameter/noise = SubResource("NoiseTexture2D_p5x2j")
+shader_parameter/speed = 0.005
+shader_parameter/strength = 0.5
+
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
 [node name="Q0yP6" type="Sprite2D" parent="." unique_id=1872691990]
-position = Vector2(581, 130)
-scale = Vector2(4.1835938, 3.7690039)
+position = Vector2(7160.625, 6692.9595)
+scale = Vector2(24.74492, 24.278252)
+texture = ExtResource("1_rpqi1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=309610132]
+material = SubResource("ShaderMaterial_yvb8b")
+position = Vector2(5507, 5248)
+scale = Vector2(18.12, 18.424)
 texture = ExtResource("1_rpqi1")
 
 [node name="Boat" parent="." unique_id=1606016725 node_paths=PackedStringArray("ui") instance=ExtResource("2_hbc2u")]
-position = Vector2(44.32257, 56.672943)
+position = Vector2(2873, 2018)
 ui = NodePath("../CanvasLayer")
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="Boat" unique_id=1238452706]
+stream = ExtResource("11_yvb8b")
+autoplay = true
+parameters/looping = true
 
 [node name="Environment" parent="Boat" unique_id=163969480 instance=ExtResource("1_p5x2j")]
 
 [node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("11_p5x2j")]
 
 [node name="MonsterSpawner" parent="." unique_id=56442799 instance=ExtResource("9_8xkvn")]
+position = Vector2(4496, 5705)
 
 [node name="SpawnPoint" parent="MonsterSpawner" unique_id=1335211392 instance=ExtResource("10_p5x2j")]
-position = Vector2(-360, -235)
+position = Vector2(-2577, -826)
 
 [node name="SpawnPoint2" parent="MonsterSpawner" unique_id=89949436 instance=ExtResource("10_p5x2j")]
 position = Vector2(822, -226)
@@ -35,36 +65,38 @@ position = Vector2(822, -226)
 position = Vector2(372, -41)
 
 [node name="SpawnPoint4" parent="MonsterSpawner" unique_id=459110832 instance=ExtResource("10_p5x2j")]
-position = Vector2(-123, 47)
+position = Vector2(130, 1821)
 
 [node name="SpawnPoint5" parent="MonsterSpawner" unique_id=1024422842 instance=ExtResource("10_p5x2j")]
-position = Vector2(296, 439)
+position = Vector2(549, 2213)
 
 [node name="SpawnPoint6" parent="MonsterSpawner" unique_id=1272848320 instance=ExtResource("10_p5x2j")]
-position = Vector2(651, 211)
+position = Vector2(904, 1985)
 
 [node name="SpawnPoint7" parent="MonsterSpawner" unique_id=948294735 instance=ExtResource("10_p5x2j")]
-position = Vector2(1304, -315)
+position = Vector2(1557, 1459)
 
 [node name="SpawnPoint8" parent="MonsterSpawner" unique_id=2006032795 instance=ExtResource("10_p5x2j")]
-position = Vector2(1356, 256)
+position = Vector2(1609, 2030)
 
 [node name="SpawnPoint9" parent="MonsterSpawner" unique_id=1249625615 instance=ExtResource("10_p5x2j")]
-position = Vector2(-555, 539)
+position = Vector2(1451, -833)
 
 [node name="SpawnPoint10" parent="MonsterSpawner" unique_id=917205455 instance=ExtResource("10_p5x2j")]
-position = Vector2(-90, -585)
+position = Vector2(1916, -1957)
 
 [node name="SpawnPoint11" parent="MonsterSpawner" unique_id=1515166381 instance=ExtResource("10_p5x2j")]
-position = Vector2(463, -746)
+position = Vector2(2469, -2118)
 
 [node name="SpawnPoint12" parent="MonsterSpawner" unique_id=706404216 instance=ExtResource("10_p5x2j")]
-position = Vector2(1131, -773)
+position = Vector2(3137, -2145)
 
 [node name="SpawnPoint13" parent="MonsterSpawner" unique_id=328219394 instance=ExtResource("10_p5x2j")]
-position = Vector2(897, 551)
+position = Vector2(-2080, 1058)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1238452706]
-stream = ExtResource("11_yvb8b")
-autoplay = true
-parameters/looping = true
+[node name="Islands" parent="." unique_id=1059542999 instance=ExtResource("8_hbc2u")]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=887553768]
+modulate = Color(0.3019608, 0.03137255, 0.6784314, 0.5254902)
+position = Vector2(2623, 1777)
+texture = ExtResource("10_8xkvn")

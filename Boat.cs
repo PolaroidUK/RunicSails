@@ -4,8 +4,8 @@ using Godot;
 public partial class Boat : CharacterBody2D
 {
 	public float Speed = 0f;
-	public float Accelaration = 5f;
-	public float MaxSpeed = 300.0f;
+	public float Accelaration = 10f;
+	public float MaxSpeed = 100.0f;
 	public const float rotationSpeed = 0.01f;
 	private float wantedDirection;
 	private Vector2 currentDirection = Vector2.Up;
@@ -101,6 +101,10 @@ public partial class Boat : CharacterBody2D
 				break;
 			case Runes.Lights:
 				_lights = !_lights;
+				if (_lights)
+				{
+					lanternSound.Play();
+				}
 				break;
 			case Runes.North:
 				wantedDirection = 0;
@@ -128,12 +132,14 @@ public partial class Boat : CharacterBody2D
 	{
 		GD.Print("Raise Sails");
 		Ship.Call("raise_sails");
+		sailUpSound.Play();
 	}
 
 	public void DropSails()
 	{
 		GD.Print("Drop Sails");
 		Ship.Call("drop_sails");
+		sailUpSound.Play();
 	}
 	
 	private void RecalculateSpeed()
@@ -142,15 +148,14 @@ public partial class Boat : CharacterBody2D
 		Accelaration = 0;
 		if (_oars)
 		{
-			Accelaration += 5f;
-			MaxSpeed = 100.0f;
+			Accelaration += 10f;
+			MaxSpeed = 50.0f;
 		}
 		if (_sails)
 		{
-			Accelaration += 5f;
-			MaxSpeed = 300.0f;
+			Accelaration += 10f;
+			MaxSpeed = 100.0f;
 		}
-
 		
 	}
 	public override void _PhysicsProcess(double delta)
@@ -213,6 +218,16 @@ public partial class Boat : CharacterBody2D
 		{
 			var rng = new RandomNumberGenerator();
 			ShootArrow(Rotation + Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f), type);
+		}
+
+		if (type == Monster.EMonster.Arrow)
+		{
+			
+			arrowFireSound.Play();
+		}
+		else
+		{
+			arrowFireSound.Play();
 		}
 		_arrowCooldownTime = Time.GetTicksMsec();
 	}

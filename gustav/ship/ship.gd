@@ -135,7 +135,7 @@ func drop_sails() -> bool:
 	return true
 
 func update_visuals( speed: float, lights:bool ):
-	if speed>150:
+	if speed>50:
 		set_sail_pace(SailPace.QUICK)
 	elif speed>25:
 		set_sail_pace(SailPace.SLOW)
