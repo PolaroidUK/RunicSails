@@ -86,7 +86,28 @@ public partial class Boat : CharacterBody2D
 			case Runes.Oars:
 				_oars = !_oars;
 				break;
+			
 			case Runes.None:
+				break;
+			case Runes.Arrows:
+				break;
+			case Runes.Lights:
+				_lights = !_lights;
+				break;
+			case Runes.North:
+				wantedDirection = 0;
+				break;
+			case Runes.South:
+				wantedDirection = Mathf.Pi;
+				break;
+			case Runes.East:
+				wantedDirection = Mathf.Pi/2;
+				break;
+			case Runes.West:
+				wantedDirection = Mathf.Pi*1.5f;
+				break;
+			case Runes.Fish:
+				GD.Print("Throw fish");
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();

@@ -8,6 +8,7 @@ public enum Runes
    North,
    South,
    East,
-   West
+   West,
+   Fish
    
 }

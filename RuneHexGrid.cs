@@ -369,11 +369,46 @@ public partial class RuneHexGrid : Control
             new LineKey(5, 3),
             new LineKey(6, 3)
         );
-
         _knownPatterns[Runes.Oars] = CreateMaskFromEdges(
+            new LineKey(2, 5),
+            new LineKey(2, 0),
+            new LineKey(5, 3),
+            new LineKey(0, 3),
+            new LineKey(3, 1),
+            new LineKey(3, 6)
+        );
+        _knownPatterns[Runes.Fish] = CreateMaskFromEdges(
             new LineKey(0, 1),
+            new LineKey(0, 3),
+            new LineKey(3, 6),
+            new LineKey(5, 6)
+        );
+        _knownPatterns[Runes.Lights] = CreateMaskFromEdges(
+            new LineKey(2, 5),
+            new LineKey(2, 3),
+            new LineKey(3, 4)
+        );
+        _knownPatterns[Runes.Arrows] = CreateMaskFromEdges(
+            new LineKey(2, 3),
+            new LineKey(3, 4),
+            new LineKey(3, 5),
+            new LineKey(4, 6)
+        );
+        _knownPatterns[Runes.North] = CreateMaskFromEdges(
+            new LineKey(2, 3),
+            new LineKey(3, 4),
+            new LineKey(3, 6)
+        );
+        _knownPatterns[Runes.West] = CreateMaskFromEdges(
             new LineKey(1, 2),
-            new LineKey(1, 4)
+            new LineKey(2, 6)
+        );
+        _knownPatterns[Runes.East] = CreateMaskFromEdges(
+            new LineKey(2, 3),
+            new LineKey(3, 4)
+        );
+        _knownPatterns[Runes.South] = CreateMaskFromEdges(
+            new LineKey(3, 4)
         );
     }
 
