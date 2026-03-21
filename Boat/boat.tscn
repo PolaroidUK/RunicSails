@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://Arrow/arrow.tscn" id="2_wob0g"]
 [ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="3_57yac"]
 [ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="4_oew0k"]
+[ext_resource type="AudioStream" uid="uid://bj6mbcuq5lfkc" path="res://soundeffects/sail_up_down.mp3" id="5_57yac"]
+[ext_resource type="AudioStream" uid="uid://bdy721rm17wqn" path="res://soundeffects/lantern_on.mp3" id="6_oew0k"]
+[ext_resource type="AudioStream" uid="uid://c2qs7xc3l0gdc" path="res://soundeffects/arrow_fire.mp3" id="7_kdl8m"]
+[ext_resource type="AudioStream" uid="uid://dl5wsh5fsthji" path="res://soundeffects/wood_ship_crack_sound.mp3" id="8_8jwn6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
 radius = 26.0
@@ -12,11 +16,15 @@ height = 105.9
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxrcv"]
 size = Vector2(29.49265, 23.662956)
 
-[node name="Boat" type="CharacterBody2D" unique_id=1606016725 node_paths=PackedStringArray("Sprite", "Ship")]
+[node name="Boat" type="CharacterBody2D" unique_id=1606016725 node_paths=PackedStringArray("Sprite", "Ship", "lanternSound", "arrowFireSound", "sailUpSound", "crackSound")]
 script = ExtResource("1_reikl")
 Sprite = NodePath("Sprite")
 Ship = NodePath("Ship")
 arrow = ExtResource("2_wob0g")
+lanternSound = NodePath("AudioStreamPlayer2D")
+arrowFireSound = NodePath("AudioStreamPlayer2D3")
+sailUpSound = NodePath("AudioStreamPlayer2D2")
+crackSound = NodePath("AudioStreamPlayer2D4")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1634597975]
 visible = false
@@ -39,5 +47,18 @@ shape = SubResource("RectangleShape2D_uxrcv")
 
 [node name="Ship" parent="." unique_id=616131769 instance=ExtResource("4_oew0k")]
 position = Vector2(0, -1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=856861893]
+stream = ExtResource("6_oew0k")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=709425857]
+stream = ExtResource("5_57yac")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=449918834]
+scale = Vector2(1, 0.98989516)
+stream = ExtResource("7_kdl8m")
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="." unique_id=529367528]
+stream = ExtResource("8_8jwn6")
 
 [connection signal="body_entered" from="Area2D" to="." method="HitSomething"]

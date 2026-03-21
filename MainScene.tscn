@@ -1,21 +1,12 @@
 [gd_scene format=3 uid="uid://0rgypnempnlw"]
 
-[ext_resource type="PackedScene" uid="uid://dmnf2eg2s85gs" path="res://gustav/gustav-pub/SeaEnvironment.tscn" id="1_p5x2j"]
+[ext_resource type="PackedScene" path="res://gustav/gustav-pub/SeaEnvironment.tscn" id="1_p5x2j"]
 [ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_rpqi1"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="2_hbc2u"]
-[ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
-[ext_resource type="Script" uid="uid://c2wfdxjlpxnw" path="res://RuneIsland.cs" id="6_hbc2x"]
-[ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
-[ext_resource type="Script" uid="uid://bo1x27ftihdx6" path="res://MainIsland.cs" id="8_8xkvn"]
-[ext_resource type="PackedScene" uid="uid://dn602mxxl5dth" path="res://Monster/MonsterSpawner.tscn" id="9_8xkvn"]
-[ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="10_p5x2j"]
+[ext_resource type="PackedScene" path="res://Monster/MonsterSpawner.tscn" id="9_8xkvn"]
+[ext_resource type="PackedScene" path="res://Monster/SpawnPoint.tscn" id="10_p5x2j"]
 [ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="11_p5x2j"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a814b"]
-size = Vector2(127, 127)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xkvn"]
-size = Vector2(266, 255)
+[ext_resource type="AudioStream" uid="uid://drmtce6gq6tg2" path="res://soundeffects/sea.mp3" id="11_yvb8b"]
 
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
@@ -29,200 +20,6 @@ position = Vector2(44.32257, 56.672943)
 ui = NodePath("../CanvasLayer")
 
 [node name="Environment" parent="Boat" unique_id=163969480 instance=ExtResource("1_p5x2j")]
-
-[node name="Islands" type="Node2D" parent="." unique_id=1133923920]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Islands" unique_id=868634319]
-position = Vector2(0, -352)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D" unique_id=1525772730]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D" unique_id=1438996474]
-texture = ExtResource("4_uxrcv")
-
-[node name="RuneIsland" type="StaticBody2D" parent="Islands" unique_id=851544554 node_paths=PackedStringArray("Area")]
-position = Vector2(137, -192)
-script = ExtResource("6_hbc2x")
-Area = NodePath("Area2D")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/RuneIsland" unique_id=1792610006]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/RuneIsland" unique_id=10492090]
-texture = ExtResource("4_uxrcv")
-
-[node name="Area2D" type="Area2D" parent="Islands/RuneIsland" unique_id=1911131685]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/RuneIsland/Area2D" unique_id=1255675784]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_8xkvn")
-
-[node name="Screenshot20260321133757" type="Sprite2D" parent="Islands/RuneIsland/Area2D" unique_id=395951038]
-position = Vector2(-4.0000076, 1)
-scale = Vector2(0.3796296, 0.3762058)
-texture = ExtResource("7_torvr")
-
-[node name="MainIsland" type="StaticBody2D" parent="Islands" unique_id=739237283 node_paths=PackedStringArray("Area")]
-position = Vector2(337, 182)
-script = ExtResource("8_8xkvn")
-Area = NodePath("Area2D")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/MainIsland" unique_id=504980137]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/MainIsland" unique_id=225869737]
-texture = ExtResource("4_uxrcv")
-
-[node name="Area2D" type="Area2D" parent="Islands/MainIsland" unique_id=205102273]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/MainIsland/Area2D" unique_id=82161321]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_8xkvn")
-
-[node name="Screenshot20260321133757" type="Sprite2D" parent="Islands/MainIsland/Area2D" unique_id=1553722409]
-position = Vector2(-4.0000076, 1)
-scale = Vector2(0.3796296, 0.3762058)
-texture = ExtResource("7_torvr")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Islands" unique_id=215556355]
-position = Vector2(250, -471)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D2" unique_id=1319212592]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D2" unique_id=163751981]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Islands" unique_id=18224609]
-position = Vector2(498, -248)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D3" unique_id=344445596]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D3" unique_id=1964917479]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Islands" unique_id=2018945601]
-position = Vector2(704, -492)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D4" unique_id=1782250215]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D4" unique_id=1969486002]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="Islands" unique_id=1880777683]
-position = Vector2(1021, -487)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D5" unique_id=502440814]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D5" unique_id=1840174932]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="Islands" unique_id=1302946859]
-position = Vector2(1227, -78)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D6" unique_id=611000741]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D6" unique_id=1287645441]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="Islands" unique_id=1280472723]
-position = Vector2(947, 234)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D7" unique_id=1178441140]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D7" unique_id=152623737]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="Islands" unique_id=1192107576]
-position = Vector2(-651, 289)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D8" unique_id=1622602213]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D8" unique_id=318559893]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="Islands" unique_id=239086668]
-position = Vector2(-647, -28)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D9" unique_id=669000638]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D9" unique_id=1079289909]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D10" type="StaticBody2D" parent="Islands" unique_id=1934016036]
-position = Vector2(-610, -311)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D10" unique_id=1190983595]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D10" unique_id=1847262992]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D11" type="StaticBody2D" parent="Islands" unique_id=1405331854]
-position = Vector2(-357, -470)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D11" unique_id=209226134]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D11" unique_id=485229995]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D12" type="StaticBody2D" parent="Islands" unique_id=1100984195]
-position = Vector2(-341, 306)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D12" unique_id=1635603777]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D12" unique_id=1954177557]
-texture = ExtResource("4_uxrcv")
-
-[node name="StaticBody2D13" type="StaticBody2D" parent="Islands" unique_id=1108677460]
-position = Vector2(17, 366)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D13" unique_id=2111175953]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_a814b")
-
-[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D13" unique_id=1779515942]
-texture = ExtResource("4_uxrcv")
 
 [node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("11_p5x2j")]
 
@@ -266,3 +63,8 @@ position = Vector2(1131, -773)
 
 [node name="SpawnPoint13" parent="MonsterSpawner" unique_id=328219394 instance=ExtResource("10_p5x2j")]
 position = Vector2(897, 551)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1238452706]
+stream = ExtResource("11_yvb8b")
+autoplay = true
+parameters/looping = true
