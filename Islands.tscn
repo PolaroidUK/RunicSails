@@ -1,20 +1,17 @@
 [gd_scene format=3 uid="uid://dbgrrrq8kehs4"]
 
 [ext_resource type="Script" uid="uid://lqj86g13ndaf" path="res://IslandCollisions.cs" id="1_krjj2"]
-[ext_resource type="Texture2D" uid="uid://biregtavu1cof" path="res://IslandGenerator/island-172126/base.png" id="2_cr788"]
-[ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="3_cr788"]
+[ext_resource type="Texture2D" uid="uid://con48etrhoit3" path="res://IslandGenerator/island-23348/base.png" id="2_cr788"]
 
 [node name="Islands" type="Node2D" unique_id=1059542999]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1553974527]
 position = Vector2(-1484, -1218)
+scale = Vector2(2, 2)
 script = ExtResource("1_krjj2")
 collisionBitmap = ExtResource("2_cr788")
 AlphaThreshold = 0
 
 [node name="Base" type="Sprite2D" parent="StaticBody2D" unique_id=158300432]
-position = Vector2(1600, 1600)
+position = Vector2(3200, 3200)
 texture = ExtResource("2_cr788")
-
-[node name="Boat" parent="." unique_id=1606016725 instance=ExtResource("3_cr788")]
-position = Vector2(688, 168)

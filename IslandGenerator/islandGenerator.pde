@@ -1,5 +1,6 @@
-PImage islandHeightMap;
+PImage islandHeightMap; //<>//
 PImage islandNormalMap;
+float[] heightMap;
 
 int islandWidth = 3200;
 int islandHeight = 3200;
@@ -12,7 +13,8 @@ void setup() {
 }
 
 void draw() {
-  background(20, 50, 120);
+  //background(20, 50, 120);
+  background(70);
 
   var image = islandHeightMap;
   switch(viewState) {
@@ -50,6 +52,7 @@ void printIsland() {
 void generateIsland() {
   islandHeightMap = createImage(islandWidth, islandHeight, ARGB);
   islandNormalMap = createImage(islandWidth, islandHeight, ARGB);
+  heightMap = new float[islandWidth * islandHeight];
 
   noiseDetail(4, 0.5);
   noiseSeed(floor(random(0, 9000000)));
@@ -71,6 +74,8 @@ void generateHeightMap() {
     noiseValue = noiseValue - centerDistance*3f;
     noiseValue*= 2;
 
+    heightMap[i] = noiseValue;
+
     // if below sea level -> transparent
     if (noiseValue < 0) {
       islandHeightMap.pixels[i] = color(0, 0, 0, 0);
@@ -89,8 +94,8 @@ void generateHeightMap() {
 color colorForHeight(float h) {
   // color bands from deep -> peak
   color[] bands = {
-    color(0, 40, 120),    // deep water
-    color(50, 110, 200),  // shallow water
+    //color(0, 40, 120),    // deep water
+    //color(50, 110, 200),  // shallow water
     color(240, 220, 160), // sand
     color(90, 160, 70),   // grass
     color(110, 100, 90),  // rock
@@ -99,6 +104,10 @@ color colorForHeight(float h) {
   int bandCount = bands.length;
   int band = min(floor(h * bandCount), bandCount - 1);
   color c = bands[band];
+  
+  if(h < 0){
+    return color(0,0);
+  }
   // ensure fully opaque for land pixels
   return color(red(c), green(c), blue(c), 255);
 }
@@ -138,7 +147,7 @@ void generateNormalMap() {
 
 float getHeightAt(int sx, int sy) {
   int idx = sy * islandWidth + sx;
-  color c = islandHeightMap.pixels[idx];
-  if (alpha(c) == 0) return 0;
-  return brightness(c) / 255.0;
+  float c = heightMap[idx];
+  if (c < 0) return 0;
+  return c;
 }
