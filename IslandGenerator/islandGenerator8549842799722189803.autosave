@@ -70,7 +70,7 @@ void generateHeightMap() {
     float noiseValue = noise(x/100f, y/100f)*2-1;
     noiseValue = noiseValue - centerDistance*3f;
     noiseValue*= 2;
-
+    
     // if below sea level -> transparent
     if (noiseValue < 0) {
       islandHeightMap.pixels[i] = color(0, 0, 0, 0);
