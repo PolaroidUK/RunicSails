@@ -13,10 +13,12 @@ public partial class RuneHexGrid : Control
     [Export] public float DotRadius = 12f;
     [Export] public bool DrawConnections = true;
 
-    private readonly List<HexNode> _nodes = new();
-    private readonly Dictionary<Vector2I, HexNode> _nodeMap = new();
-    private readonly List<(HexNode A, HexNode B)> _connections = new();
-    private readonly List<HexNode> _selectedPath = new();
+    private readonly List<HexNode> _nodes = [];
+    private readonly Dictionary<Vector2I, HexNode> _nodeMap = [];
+    private readonly List<(HexNode A, HexNode B)> _connections = [];
+    private readonly Dictionary<LineKey, int> _lineBitIndices = [];
+    private readonly Dictionary<string, ulong> _knownPatterns = [];
+    private readonly List<HexNode> _selectedPath = [];
 
     private bool _isDragging;
 
@@ -26,6 +28,7 @@ public partial class RuneHexGrid : Control
 
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GenerateHexGrid();
+        RegisterKnownPatterns();
     }
 
     public override void _Draw()
@@ -113,6 +116,7 @@ public partial class RuneHexGrid : Control
         }
 
         QueueRedraw();
+        BuildAllLineBitIndices();
     }
 
     private void ClearExistingNodes()
@@ -141,8 +145,7 @@ public partial class RuneHexGrid : Control
     {
         if (_selectedPath.Count == 0)
         {
-            SelectNode(node);
-            _selectedPath.Add(node);
+            AppendNode(node);
             QueueRedraw();
             return;
         }
@@ -152,13 +155,82 @@ public partial class RuneHexGrid : Control
         if (node == lastNode)
             return;
 
-        SelectNode(node);
-        _selectedPath.Add(node);
+        var nodesOnLine = GetNodesBetweenInclusive(lastNode, node);
 
-        if (!ConnectionExists(lastNode, node))
-            _connections.Add((lastNode, node));
+        // If they are on a valid straight hex line, add all intermediate nodes.
+        if (nodesOnLine.Count > 1)
+        {
+            // skip first because that's lastNode, already selected
+            for (int i = 1; i < nodesOnLine.Count; i++)
+            {
+                AppendNode(nodesOnLine[i]);
+            }
+        }
+        else
+        {
+            // fallback: just add the node normally
+            AppendNode(node);
+        }
 
         QueueRedraw();
+    }
+
+    private void AppendNode(HexNode node)
+    {
+        if (_selectedPath.Count > 0 && _selectedPath[^1] == node)
+            return;
+
+        if (_selectedPath.Count > 0)
+        {
+            HexNode lastNode = _selectedPath[^1];
+
+            if (!ConnectionExists(lastNode, node))
+                _connections.Add((lastNode, node));
+        }
+
+        SelectNode(node);
+        _selectedPath.Add(node);
+    }
+
+    private List<HexNode> GetNodesBetweenInclusive(HexNode from, HexNode to)
+    {
+        var result = new List<HexNode>();
+
+        int dq = to.Q - from.Q;
+        int dr = to.R - from.R;
+        int ds = (-to.Q - to.R) - (-from.Q - from.R);
+
+        int distance = Math.Max(Math.Abs(dq), Math.Max(Math.Abs(dr), Math.Abs(ds)));
+
+        if (distance == 0)
+        {
+            result.Add(from);
+            return result;
+        }
+
+        bool isStraightLine = dq == 0 || dr == 0 || ds == 0;
+        if (!isStraightLine)
+            return result;
+
+        int stepQ = dq / distance;
+        int stepR = dr / distance;
+
+        for (int i = 0; i <= distance; i++)
+        {
+            int q = from.Q + stepQ * i;
+            int r = from.R + stepR * i;
+
+            if (_nodeMap.TryGetValue(new Vector2I(q, r), out var node))
+            {
+                result.Add(node);
+            }
+            else
+            {
+                return [];
+            }
+        }
+
+        return result;
     }
 
     private bool ConnectionExists(HexNode a, HexNode b)
@@ -192,6 +264,10 @@ public partial class RuneHexGrid : Control
         if (_selectedPath.Count == 0)
             return;
 
+        ulong patternMask = BuildPatternMask();
+        string matched = FindMatchingPattern(patternMask);
+        GD.Print(matched);
+
         int[] nodeIds = _selectedPath.Select(x => x.Id).ToArray();
 
         var linePairs = new Godot.Collections.Array<Vector2I>();
@@ -201,13 +277,6 @@ public partial class RuneHexGrid : Control
         }
 
         EmitSignal(SignalName.PatternCompleted, nodeIds, linePairs);
-
-        GD.Print("Pattern complete");
-
-        foreach (var pair in linePairs)
-        {
-            GD.Print($"Line: {pair.X} -> {pair.Y}");
-        }
     }
 
     private Vector2 AxialToPixel(int q, int r, float size)
@@ -215,6 +284,53 @@ public partial class RuneHexGrid : Control
         float x = size * 1.5f * q;
         float y = size * Mathf.Sqrt(3f) * (r + q / 2f);
         return new Vector2(x, y);
+    }
+
+    private void BuildAllLineBitIndices()
+    {
+        _lineBitIndices.Clear();
+
+        int bitIndex = 0;
+
+        for (int i = 0; i < _nodes.Count; i++)
+        {
+            for (int j = i + 1; j < _nodes.Count; j++)
+            {
+                var line = new LineKey(_nodes[i].Id, _nodes[j].Id);
+                _lineBitIndices[line] = bitIndex;
+                bitIndex++;
+            }
+        }
+
+        GD.Print($"Total possible unique lines: {_lineBitIndices.Count}");
+    }
+
+    private ulong BuildPatternMask()
+    {
+        ulong mask = 0;
+
+        foreach (var connection in _connections)
+        {
+            var line = new LineKey(connection.A.Id, connection.B.Id);
+
+            if (_lineBitIndices.TryGetValue(line, out int bitIndex))
+            {
+                mask |= 1UL << bitIndex;
+            }
+        }
+
+        return mask;
+    }
+
+    private string? FindMatchingPattern(ulong mask)
+    {
+        foreach (var kvp in _knownPatterns)
+        {
+            if (kvp.Value == mask)
+                return kvp.Key;
+        }
+
+        return null;
     }
 
     public override void _Notification(int what)
@@ -237,4 +353,63 @@ public partial class RuneHexGrid : Control
 
         QueueRedraw();
     }
+
+    private void RegisterKnownPatterns()
+    {
+        _knownPatterns["Triangle"] = CreateMaskFromEdges(
+            new LineKey(0, 1),
+            new LineKey(1, 3),
+            new LineKey(0, 3)
+        );
+
+        _knownPatterns["Fork"] = CreateMaskFromEdges(
+            new LineKey(0, 1),
+            new LineKey(1, 2),
+            new LineKey(1, 4)
+        );
+    }
+
+    private ulong CreateMaskFromEdges(params LineKey[] lines)
+    {
+        ulong mask = 0;
+
+        foreach (var line in lines)
+        {
+            if (_lineBitIndices.TryGetValue(line, out int bitIndex))
+            {
+                mask |= 1UL << bitIndex;
+            }
+            else
+            {
+                GD.PushError($"Unknown line in pattern registration: {line}");
+            }
+        }
+
+        return mask;
+    }
+}
+
+public readonly struct LineKey : IEquatable<LineKey>
+{
+    public int A { get; }
+    public int B { get; }
+
+    public LineKey(int a, int b)
+    {
+        if (a < b)
+        {
+            A = a;
+            B = b;
+        }
+        else
+        {
+            A = b;
+            B = a;
+        }
+    }
+
+    public bool Equals(LineKey other) => A == other.A && B == other.B;
+    public override bool Equals(object? obj) => obj is LineKey other && Equals(other);
+    public override int GetHashCode() => HashCode.Combine(A, B);
+    public override string ToString() => $"{A}-{B}";
 }
