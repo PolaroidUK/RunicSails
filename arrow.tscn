@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://by6lsufeojhqm"]
+
+[ext_resource type="Script" uid="uid://voplo7lb3hdp" path="res://Arrow.cs" id="1_2ndhl"]
+[ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="2_acd0x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a814b"]
+radius = 7.0
+
+[node name="Arrow" type="RigidBody2D" unique_id=1017168830]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_2ndhl")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38326268]
+shape = SubResource("CapsuleShape2D_a814b")
+
+[node name="Boat" type="Sprite2D" parent="." unique_id=1678891878]
+position = Vector2(0, -1)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("2_acd0x")

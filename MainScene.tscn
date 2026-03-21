@@ -3,14 +3,22 @@
 [ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="1_3mqji"]
 [ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_rpqi1"]
 [ext_resource type="Script" uid="uid://dwnnpacba40nh" path="res://Boat.cs" id="2_uxrcv"]
+[ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="3_a814b"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
+[ext_resource type="Script" uid="uid://14ijh8anacth" path="res://Monster.cs" id="6_a814b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
 radius = 26.0
-height = 98.0
+height = 105.9
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxrcv"]
+size = Vector2(29.49265, 23.662956)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a814b"]
 size = Vector2(127, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5crlr"]
+size = Vector2(129, 132)
 
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
@@ -21,21 +29,187 @@ texture = ExtResource("1_rpqi1")
 
 [node name="Boat" type="CharacterBody2D" parent="." unique_id=483988252]
 script = ExtResource("2_uxrcv")
+arrow = ExtResource("3_a814b")
 
 [node name="Sprite" type="Sprite2D" parent="Boat" unique_id=1128885094]
 texture = ExtResource("1_3mqji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boat" unique_id=253377539]
+position = Vector2(0.245, 5.05)
 shape = SubResource("CapsuleShape2D_rf2cd")
 
 [node name="Camera2D" type="Camera2D" parent="Boat" unique_id=918251911]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=868634319]
+[node name="Area2D" type="Area2D" parent="Boat" unique_id=1703314226]
+position = Vector2(3, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat/Area2D" unique_id=1138941928]
+position = Vector2(-1.7099627, -32.71573)
+rotation = 0.82030475
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_uxrcv")
+
+[node name="Islands" type="Node2D" parent="." unique_id=1133923920]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Islands" unique_id=868634319]
 position = Vector2(0, -352)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1525772730]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D" unique_id=1525772730]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_a814b")
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=1438996474]
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D" unique_id=1438996474]
 texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Islands" unique_id=215556355]
+position = Vector2(250, -471)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D2" unique_id=1319212592]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D2" unique_id=163751981]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Islands" unique_id=18224609]
+position = Vector2(498, -248)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D3" unique_id=344445596]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D3" unique_id=1964917479]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Islands" unique_id=2018945601]
+position = Vector2(704, -492)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D4" unique_id=1782250215]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D4" unique_id=1969486002]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Islands" unique_id=1880777683]
+position = Vector2(1021, -487)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D5" unique_id=502440814]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D5" unique_id=1840174932]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Islands" unique_id=1302946859]
+position = Vector2(1227, -78)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D6" unique_id=611000741]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D6" unique_id=1287645441]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Islands" unique_id=1280472723]
+position = Vector2(947, 234)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D7" unique_id=1178441140]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D7" unique_id=152623737]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Islands" unique_id=1192107576]
+position = Vector2(-651, 289)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D8" unique_id=1622602213]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D8" unique_id=318559893]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Islands" unique_id=239086668]
+position = Vector2(-647, -28)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D9" unique_id=669000638]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D9" unique_id=1079289909]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Islands" unique_id=1934016036]
+position = Vector2(-610, -311)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D10" unique_id=1190983595]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D10" unique_id=1847262992]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Islands" unique_id=1405331854]
+position = Vector2(-357, -470)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D11" unique_id=209226134]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D11" unique_id=485229995]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Islands" unique_id=1100984195]
+position = Vector2(-341, 306)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D12" unique_id=1635603777]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D12" unique_id=1954177557]
+texture = ExtResource("4_uxrcv")
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="Islands" unique_id=1108677460]
+position = Vector2(17, 366)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/StaticBody2D13" unique_id=2111175953]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D13" unique_id=1779515942]
+texture = ExtResource("4_uxrcv")
+
+[node name="Arrow" parent="." unique_id=1017168830 instance=ExtResource("3_a814b")]
+position = Vector2(-97, 7)
+
+[node name="Monster" type="Area2D" parent="." unique_id=467657681]
+position = Vector2(-298, 0.99998474)
+scale = Vector2(0.735, 0.735)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("6_a814b")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Monster" unique_id=942928061]
+modulate = Color(1, 0.2784314, 0.18431373, 1)
+texture = ExtResource("4_uxrcv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1931186920]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_5crlr")
+
+[connection signal="body_entered" from="Boat/Area2D" to="Boat" method="HitSomething"]
