@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://dmnf2eg2s85gs"]
+
+[ext_resource type="Script" uid="uid://0efhqfkm1mb2" path="res://environment/environment.gd" id="1_br0ne"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tva84"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_tva84"]
+offsets = PackedFloat32Array(0, 0.28074867, 0.8181818, 1)
+colors = PackedColorArray(0, 0.8039216, 0.83137256, 0, 0, 0.8126208, 0.82042927, 1, 0.81000876, 0.9526258, 0.9730944, 1, 0.6745098, 0.8666667, 0.9372549, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_br0ne"]
+gradient = SubResource("Gradient_tva84")
+width = 6
+height = 32
+fill_from = Vector2(0.47863248, 0.07692308)
+fill_to = Vector2(0.5470086, 0.8397436)
+
+[sub_resource type="Gradient" id="Gradient_br0ne"]
+offsets = PackedFloat32Array(0, 0.3006993, 0.6993007, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mt3m3"]
+gradient = SubResource("Gradient_br0ne")
+
+[sub_resource type="Curve" id="Curve_tva84"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.12058824, 24.06015), 0.0, 0.0, 0, 0, Vector2(0.30000004, -16.34085), 0.0, 0.0, 0, 0, Vector2(0.54117656, 20.150375), 0.0, 0.0, 0, 0, Vector2(0.7088236, -16.34085), 0.0, 0.0, 0, 0, Vector2(0.8352942, 9.724304), 0.0, 0.0, 0, 0, Vector2(1, -20.25064), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_br0ne"]
+curve = SubResource("Curve_tva84")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mt3m3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 50, 1)
+gravity = Vector3(50, 8, 0)
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 5.9999976
+tangential_accel_curve = SubResource("CurveTexture_br0ne")
+damping_max = 100.00001
+scale_min = 0.099999994
+scale_max = 0.29999998
+color_ramp = SubResource("GradientTexture1D_mt3m3")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_br0ne"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_mt3m3"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0.0147058815, 0.019473672), 0.0, 1.4068674, 0, 0, Vector2(0.5088235, 0.29902256), -0.0017867486, -0.0017867486, 0, 0, Vector2(1, 0), -1.7813373, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8abjf"]
+curve = SubResource("Curve_mt3m3")
+
+[sub_resource type="Gradient" id="Gradient_hmh2r"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_at51d"]
+gradient = SubResource("Gradient_hmh2r")
+
+[sub_resource type="Curve" id="Curve_sqi0i"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qnwya"]
+_limits = [0.0, 40.0, 0.0, 1.0]
+_data = [Vector2(0.011764705, 0), 0.0, 192.03702, 0, 0, Vector2(0.21764705, 18.444445), -1.1252481, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_15uko"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fmky7"]
+curve_x = SubResource("Curve_sqi0i")
+curve_y = SubResource("Curve_qnwya")
+curve_z = SubResource("Curve_15uko")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2y5cx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 50, 1)
+gravity = Vector3(0, 500, 0)
+scale_min = 0.39999998
+scale_max = 2.0
+scale_over_velocity_curve = SubResource("CurveXYZTexture_fmky7")
+color_ramp = SubResource("GradientTexture1D_at51d")
+alpha_curve = SubResource("CurveTexture_8abjf")
+
+[node name="Environment" type="Node2D" unique_id=163969480]
+script = ExtResource("1_br0ne")
+
+[node name="Weather" type="Node2D" parent="." unique_id=1771993132]
+
+[node name="Wind" type="GPUParticles2D" parent="Weather" unique_id=1894092932]
+material = SubResource("CanvasItemMaterial_tva84")
+amount = 7
+texture = SubResource("GradientTexture2D_br0ne")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_mt3m3")
+
+[node name="Rain" type="GPUParticles2D" parent="Weather" unique_id=1411988728]
+material = SubResource("CanvasItemMaterial_br0ne")
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_2y5cx")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1139993524]
+color = Color(0.15639374, 0.3018994, 0.3426385, 1)
