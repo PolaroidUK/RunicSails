@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="3_a814b"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
 [ext_resource type="Script" uid="uid://14ijh8anacth" path="res://Monster.cs" id="6_a814b"]
+[ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://HexNode.cs" id="6_hbc2u"]
+[ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid.cs" id="7_5crlr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
 radius = 26.0
@@ -48,6 +50,21 @@ position = Vector2(-1.7099627, -32.71573)
 rotation = 0.82030475
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_uxrcv")
+
+[node name="RuneHexGrid" type="Control" parent="Boat" unique_id=753535251]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 250.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("7_5crlr")
+
+[node name="HexNode" type="Control" parent="Boat/RuneHexGrid" unique_id=1420234114]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_hbc2u")
+metadata/_edit_group_ = true
 
 [node name="Islands" type="Node2D" parent="." unique_id=1133923920]
 
