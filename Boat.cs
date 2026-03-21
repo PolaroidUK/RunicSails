@@ -9,6 +9,10 @@ public partial class Boat : CharacterBody2D
 	public const float rotationSpeed = 0.01f;
 	private float wantedDirection;
 	private Vector2 currentDirection = Vector2.Up;
+
+	private bool _sails, _lights, _oars;
+
+	[Export] public Node2D Ship;
 	
 	[Export] public PackedScene arrow;
 	public override void _Process(double delta)
@@ -38,6 +42,43 @@ public partial class Boat : CharacterBody2D
 			GetParent().AddChild(newArrow);
 		}
 	}
+
+	[Export] public LineEdit runeNumberInput;
+	
+	public void TakeDebugInput()
+	{
+		ActivateRune(Convert.ToInt32(runeNumberInput.Text));
+	}
+	public void ActivateRune(int runeID)
+	{
+		switch (runeID)
+		{
+			case 1:
+				if (_sails)
+				{
+					_sails = false;
+					RaiseSails();
+				}
+				else
+				{
+					_sails = true;
+					DropSails();
+				}
+				break;
+		}
+	}
+
+	public void RaiseSails()
+	{
+		GD.Print("Raise Sails");
+		Ship.Call("raise_sails");
+	}
+	public void DropSails()
+	{
+		GD.Print("Drop Sails");
+		Ship.Call("drop_sails");
+	}
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		Rotation = RotateTowardTarget(Rotation, wantedDirection, (float)(rotationSpeed*Speed * delta));
