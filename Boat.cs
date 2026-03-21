@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Boat : CharacterBody2D
@@ -18,6 +19,11 @@ public partial class Boat : CharacterBody2D
 	[Export] public int BurstAmount = 3;
 	[Export] public float ArrowCooldown = 0.5f;
 	private float _arrowCooldownTime = 0f;
+	private bool _sails = false;
+	private bool _lights = true;
+	private bool _oars = false;
+
+	[Export] public Node2D Ship;
 	
 	[Export] public PackedScene arrow;
 	public override void _Process(double delta)
@@ -44,6 +50,66 @@ public partial class Boat : CharacterBody2D
 			ShootArrow();
 		}
 	}
+
+	[Export] public LineEdit runeNumberInput;
+	
+	public void TakeDebugInput()
+	{
+		ActivateRune(Convert.ToInt32(runeNumberInput.Text));
+	}
+	public void ActivateRune(int runeID)
+	{
+		switch (runeID)
+		{
+			case 1:
+				if (_sails)
+				{
+					_sails = false;
+					RaiseSails();
+				}
+				else
+				{
+					_sails = true;
+					DropSails();
+				}
+				break;
+			case 2:
+				_oars = !_oars;
+				break;
+		}
+		RecalculateSpeed();
+		Ship.Call("update_visuals", Speed, _lights);
+	}
+
+	public void RaiseSails()
+	{
+		GD.Print("Raise Sails");
+		Ship.Call("raise_sails");
+	}
+
+	public void DropSails()
+	{
+		GD.Print("Drop Sails");
+		Ship.Call("drop_sails");
+	}
+	
+	private void RecalculateSpeed()
+	{
+		MaxSpeed = 0;
+		Accelaration = 0;
+		if (_oars)
+		{
+			Accelaration += 5f;
+			MaxSpeed = 100.0f;
+		}
+		if (_sails)
+		{
+			Accelaration += 5f;
+			MaxSpeed = 300.0f;
+		}
+
+		
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Rotation = RotateTowardTarget(Rotation, wantedDirection, (float)(rotationSpeed*Speed * delta));
@@ -51,6 +117,7 @@ public partial class Boat : CharacterBody2D
 		Speed = (float)Mathf.Clamp(Speed+Accelaration*delta,0,MaxSpeed);
 		Velocity = currentDirection * Speed;
 		MoveAndSlide();
+		Ship.Call("update_visuals", Speed, _lights);
 	}
 	float RotateTowardTarget(float currentRotation, float targetRotation, float step)
 	{
