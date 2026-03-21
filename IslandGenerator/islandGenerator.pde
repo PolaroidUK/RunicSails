@@ -1,36 +1,66 @@
 PImage islandHeightMap; //<>//
 PImage islandNormalMap;
+PImage islandBitMap;
 
-int islandWidth = 1600;
-int islandHeight = 1600;
+int islandWidth = 3200;
+int islandHeight = 3200;
 
 char viewState = '1';
 
 void setup() {
-  size(800, 800);
+  size(1600, 1600);
   generateIsland();
 }
 
 void draw() {
   background(20, 50, 120);
-  if (viewState == '1') {
-    image(islandHeightMap, 0, 0, 800, 800);
+
+  var image = islandHeightMap;
+  switch(viewState) {
+  case '1':
+    image = islandHeightMap;
+    break;
+  case '2':
+    image = islandNormalMap;
+    break;
+  case '3':
+    image = islandBitMap;
+    break;
   }
-  if (viewState == '2') {
-    image(islandNormalMap, 0, 0, 800, 800);
-  }
+  image(image, 0, 0, width, height);
 }
 
 void keyPressed() {
-  if (key == 'r') {
+  switch(key) {
+  case 'r':
     generateIsland();
-  }
-  
-  if(key == '1' ||
-    key == '2'
-  ){
+    break;
+  case '1':
+  case '2':
+  case '3':
     viewState = key;
+    break;
+  case 'p':
+    printIsland();
+    break;
   }
+}
+
+void printIsland() {
+  islandHeightMap.save("island-"+hour()+minute()+second()+"/base.png");
+  islandNormalMap.save("island-"+hour()+minute()+second()+"/normal.png");
+  islandBitMap.save("island-"+hour()+minute()+second()+"/collision.bmp");
+}
+
+void generateIsland() {
+  islandHeightMap = createImage(islandWidth, islandHeight, ARGB);
+  islandNormalMap = createImage(islandWidth, islandHeight, ARGB);
+  islandBitMap = createImage(islandWidth, islandHeight, ALPHA);
+
+  noiseDetail(4, 0.5);
+  noiseSeed(floor(random(0, 9000000)));
+  generateHeightMap();
+  generateNormalMap();
 }
 
 void generateHeightMap() {
@@ -41,27 +71,18 @@ void generateHeightMap() {
     float centerX = islandWidth/2f;
     float centerY = islandHeight/2f;
 
-    float centerDistance = sqrt(pow((centerX-x), 2)+pow((centerY-y), 2))/islandWidth/1.5f;
+    float centerDistance = sqrt(pow((centerX-x), 2)+pow((centerY-y), 2))/islandWidth/3f;
 
     float noiseValue = noise(x/100f, y/100f)*2-1;
-    noiseValue = noiseValue - centerDistance*1f;
+    noiseValue = noiseValue - centerDistance*3f;
+    noiseValue*= 2;
 
     color pixel = color(255-noiseValue*255);
 
     pixel = noiseValue < 0 ? color(0, 0, 0, 0): pixel;
-
+    islandBitMap.pixels[i] = noiseValue < 0 ? 0: color(255);
     islandHeightMap.pixels[i] = pixel;
   }
-}
-
-void generateIsland() {
-  islandHeightMap = createImage(islandWidth, islandHeight, ARGB);
-  islandNormalMap = createImage(islandWidth, islandHeight, ARGB);
-
-  noiseDetail(4, 0.5);
-  noiseSeed(floor(random(0, 9000000)));
-  generateHeightMap();
-  generateNormalMap();
 }
 
 void generateNormalMap() {
