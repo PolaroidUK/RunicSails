@@ -124,10 +124,12 @@ func raise_sails() -> bool:
 	if _current_sails_state == SailsState.NO_SAILS:
 		return false
 	_animation_player.play("sails-up")
+	_current_sails_state = SailsState.NO_SAILS
 	return true
 
 func drop_sails() -> bool:
 	if _current_sails_state == SailsState.FULL_SAILS:
 		return false
 	_animation_player.play_backwards("sails-up")
+	_current_sails_state = SailsState.FULL_SAILS
 	return true
