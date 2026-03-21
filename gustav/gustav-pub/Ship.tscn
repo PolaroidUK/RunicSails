@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://c748tjbv2x5qx"]
+
+[ext_resource type="Script" uid="uid://ch603bjcb4xm7" path="res://ship/ship.gd" id="1_sv3qi"]
+[ext_resource type="Shader" uid="uid://bjlb0jcix3xou" path="res://ship/hull.gdshader" id="2_8h65s"]
+[ext_resource type="Texture2D" uid="uid://de6d7odeaj1ge" path="res://ship/ship.png" id="3_7ewa0"]
+[ext_resource type="PackedScene" uid="uid://b7aw0pr82pj3o" path="res://ship/torch.tscn" id="4_c56w4"]
+[ext_resource type="Shader" uid="uid://cwkn28745npnt" path="res://ship/sail.gdshader" id="5_5gt3i"]
+[ext_resource type="Texture2D" uid="uid://n1ua5lom858q" path="res://ship/ship-normals.png" id="8_nova1"]
+[ext_resource type="Texture2D" uid="uid://balw0sg8tvrct" path="res://ship/buble.png" id="12_42cgd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42cgd"]
+load_path = "res://.godot/imported/buble.png-bdf8730664157868676c9428ff00ad7c.ctex"
+
+[sub_resource type="Curve" id="Curve_fafw3"]
+_data = [Vector2(0.016587675, 0.28648978), 0.0, 0.0, 0, 0, Vector2(0.9028436, 0.8850021), -1.6281419, -1.6281419, 0, 0, Vector2(1, 0.05126655), -0.73825526, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3m54o"]
+curve = SubResource("Curve_fafw3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fafw3"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(28, 25, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 2, 1)
+direction = Vector3(0, -1, 0)
+spread = 40.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 30.000002
+scale_min = 0.099999994
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_3m54o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y4pwt"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(3, 3, 1)
+emission_shape = 3
+emission_box_extents = Vector3(6, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 40.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 30.000002
+scale_min = 0.099999994
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_3m54o")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_42cgd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fafw3"]
+noise = SubResource("FastNoiseLite_42cgd")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q6r6c"]
+shader = ExtResource("2_8h65s")
+shader_parameter/wave_speed = 1.0
+shader_parameter/wave_size = 0.01
+shader_parameter/noise_img = SubResource("NoiseTexture2D_fafw3")
+shader_parameter/edge_size = 2.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_epypp"]
+diffuse_texture = ExtResource("3_7ewa0")
+normal_texture = ExtResource("8_nova1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hol4"]
+shader = ExtResource("5_5gt3i")
+shader_parameter/sway_speed = 3.0
+shader_parameter/sway_amount = 0.07
+shader_parameter/wave_speed = 1.0
+shader_parameter/wave_size = 0.01
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q6r6c"]
+diffuse_texture = ExtResource("3_7ewa0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epypp"]
+shader = ExtResource("5_5gt3i")
+shader_parameter/sway_speed = 3.0
+shader_parameter/sway_amount = 0.01
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_size = 0.02
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0hol4"]
+diffuse_texture = ExtResource("3_7ewa0")
+
+[sub_resource type="Animation" id="Animation_42cgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sail:scale:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.83999884]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sail:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-26.0]
+}
+
+[sub_resource type="Animation" id="Animation_fafw3"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_3m54o"]
+resource_name = "sails-up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sail:scale:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 0.4),
+"transitions": PackedFloat32Array(1, 1.8660661),
+"update": 0,
+"values": [0.83999884, 0.18]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sail:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.4),
+"transitions": PackedFloat32Array(1, 0.40612614),
+"update": 0,
+"values": [-26.0, -39.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y4pwt"]
+_data = {
+&"RESET": SubResource("Animation_42cgd"),
+&"idle": SubResource("Animation_fafw3"),
+&"sails-up": SubResource("Animation_3m54o")
+}
+
+[node name="Ship" type="Node2D" unique_id=616131769]
+script = ExtResource("1_sv3qi")
+_current_sails_state = 1
+
+[node name="bubbles" type="Node2D" parent="." unique_id=1361783825]
+
+[node name="hull-bubles" type="GPUParticles2D" parent="bubbles" unique_id=93707376]
+position = Vector2(0, 14)
+amount = 50
+texture = SubResource("CompressedTexture2D_42cgd")
+process_material = SubResource("ParticleProcessMaterial_fafw3")
+
+[node name="bubles-r" type="GPUParticles2D" parent="bubbles" unique_id=646366799]
+position = Vector2(13, -37.000004)
+rotation = 0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+amount = 200
+texture = ExtResource("12_42cgd")
+lifetime = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_y4pwt")
+
+[node name="bubles2-l" type="GPUParticles2D" parent="bubbles" unique_id=487129659]
+position = Vector2(-13, -38)
+rotation = -0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+amount = 200
+texture = ExtResource("12_42cgd")
+lifetime = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_y4pwt")
+
+[node name="hull" type="Sprite2D" parent="." unique_id=1085354100]
+material = SubResource("ShaderMaterial_q6r6c")
+texture = SubResource("CanvasTexture_epypp")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="torches" type="Node2D" parent="." unique_id=900368249]
+
+[node name="torch" parent="torches" unique_id=1630364436 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(-21, 46)
+
+[node name="torch3" parent="torches" unique_id=1938815746 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(-23, 17.999996)
+
+[node name="torch4" parent="torches" unique_id=1003359528 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(23.000004, 18)
+
+[node name="torch6" parent="torches" unique_id=842139409 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(-22.2, 4.799999)
+scale = Vector2(0.9, 0.9)
+
+[node name="torch8" parent="torches" unique_id=1582728779 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(22.8, 4.799999)
+scale = Vector2(0.9, 0.9)
+
+[node name="torch7" parent="torches" unique_id=897221469 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(1, -29)
+
+[node name="torch2" parent="torches" unique_id=1879933774 instance=ExtResource("4_c56w4")]
+unique_name_in_owner = true
+position = Vector2(23.000004, 46)
+
+[node name="sail" type="Sprite2D" parent="." unique_id=1166279989]
+light_mask = 2
+material = SubResource("ShaderMaterial_0hol4")
+position = Vector2(-1, -26)
+scale = Vector2(1, 0.83999884)
+texture = SubResource("CanvasTexture_q6r6c")
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="mast" type="Sprite2D" parent="." unique_id=1174572507]
+material = SubResource("ShaderMaterial_epypp")
+position = Vector2(0, -18)
+texture = SubResource("CanvasTexture_0hol4")
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 56)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1861431876]
+libraries/ = SubResource("AnimationLibrary_y4pwt")

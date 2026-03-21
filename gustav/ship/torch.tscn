@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://b7aw0pr82pj3o"]
+
+[ext_resource type="Script" uid="uid://j1dofcrbfx4q" path="res://ship/torch.gd" id="1_s1444"]
+[ext_resource type="Texture2D" uid="uid://c5jvdqa7gphk1" path="res://ship/torch.png" id="2_w3qnr"]
+
+[sub_resource type="Gradient" id="Gradient_s1444"]
+offsets = PackedFloat32Array(0, 0.21084337, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.4819277, 0.4819277, 0.4819277, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w3qnr"]
+gradient = SubResource("Gradient_s1444")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Animation" id="Animation_s1444"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_w3qnr"]
+resource_name = "torch"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 1.0666667, 2.0666666, 3.1, 4.1666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_kx7w4"]
+resource_name = "unlit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666666),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kx7w4"]
+_data = {
+&"RESET": SubResource("Animation_s1444"),
+&"torch": SubResource("Animation_w3qnr"),
+&"unlit": SubResource("Animation_kx7w4")
+}
+
+[node name="torch" type="PointLight2D" unique_id=1582728779]
+color = Color(0.8739342, 0.4156648, 0.02927139, 1)
+energy = 1.4
+texture = SubResource("GradientTexture2D_w3qnr")
+script = ExtResource("1_s1444")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=719330720]
+scale = Vector2(0.19999969, 0.19999969)
+texture = ExtResource("2_w3qnr")
+vframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1519753666]
+libraries/ = SubResource("AnimationLibrary_kx7w4")
+autoplay = &"torch"
+speed_scale = 5.0
