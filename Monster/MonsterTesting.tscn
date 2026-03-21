@@ -1,17 +1,26 @@
 [gd_scene format=3 uid="uid://b3an8a1sxnf0r"]
 
 [ext_resource type="PackedScene" uid="uid://dn602mxxl5dth" path="res://Monster/MonsterSpawner.tscn" id="1_0nt4f"]
+[ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_5djxg"]
 [ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="2_u4jvm"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="3_kj5f6"]
 [ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="4_u4jvm"]
+[ext_resource type="PackedScene" uid="uid://c1eu5cwu08qcx" path="res://UI.tscn" id="5_kj5f6"]
 
 [node name="MonsterTesting" type="Node2D" unique_id=152447033]
+
+[node name="Q0yP6" type="Sprite2D" parent="." unique_id=1075348600]
+modulate = Color(0.49747366, 0.49747366, 0.49747366, 1)
+position = Vector2(581, 130)
+scale = Vector2(4.1835938, 3.7690039)
+texture = ExtResource("1_5djxg")
 
 [node name="MonsterSpawner" parent="." unique_id=56442799 instance=ExtResource("1_0nt4f")]
 position = Vector2(790, 143)
 
-[node name="Boat" parent="." unique_id=1606016725 instance=ExtResource("3_kj5f6")]
+[node name="Boat" parent="." unique_id=1606016725 node_paths=PackedStringArray("ui") instance=ExtResource("3_kj5f6")]
 position = Vector2(599, 182)
+ui = NodePath("../CanvasLayer")
 
 [node name="SpawnPoint" parent="." unique_id=1335211392 instance=ExtResource("4_u4jvm")]
 position = Vector2(1035, 149)
@@ -47,3 +56,5 @@ closed = true
 
 [node name="Monster" parent="." unique_id=678498706 instance=ExtResource("2_u4jvm")]
 position = Vector2(248, -34)
+
+[node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("5_kj5f6")]

@@ -54,7 +54,7 @@ public partial class Boat : CharacterBody2D
 		}
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			ShootArrowBarrage();
+			ShootArrowBarrage(Monster.EMonster.Arrow);
 		}
 		
 	}
@@ -90,6 +90,7 @@ public partial class Boat : CharacterBody2D
 			case Runes.None:
 				break;
 			case Runes.Arrows:
+				ShootArrowBarrage(Monster.EMonster.Arrow);
 				break;
 			case Runes.Lights:
 				_lights = !_lights;
@@ -107,7 +108,7 @@ public partial class Boat : CharacterBody2D
 				wantedDirection = Mathf.Pi*1.5f;
 				break;
 			case Runes.Fish:
-				GD.Print("Throw fish");
+				ShootArrowBarrage(Monster.EMonster.Fish);
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();
@@ -191,27 +192,27 @@ public partial class Boat : CharacterBody2D
 	}
 
 
-	private void ShootArrowBarrage()
+	private void ShootArrowBarrage(Monster.EMonster type)
 	{
 		if (_arrowCooldownTime + ArrowCooldown * 1000 > Time.GetTicksMsec()) return;
 		
 		for (int i = 0; i < BurstAmount; i++)
 		{
 			var rng = new RandomNumberGenerator();
-			ShootArrow(Rotation - Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f));
+			ShootArrow(Rotation - Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f), type);
 		}
 		for (int i = 0; i < BurstAmount; i++)
 		{
 			var rng = new RandomNumberGenerator();
-			ShootArrow(Rotation + Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f));
+			ShootArrow(Rotation + Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f), type);
 		}
 		_arrowCooldownTime = Time.GetTicksMsec();
 	}
-	private void ShootArrow(float rotation)
+	private void ShootArrow(float rotation, Monster.EMonster type)
 	{
 		Arrow newArrow = arrow.Instantiate<Arrow>();
 		newArrow.SetDamage(ArrowDamage);
-		newArrow.SetType(Monster.EMonster.Arrow);
+		newArrow.SetType(type);
 		newArrow.GlobalPosition = GlobalPosition;
 		newArrow.Rotation = rotation;
 		GetParent().AddChild(newArrow);

@@ -59,9 +59,9 @@ public partial class MonsterSpawner : Node2D
         if (nearestNode == null) return;
         Monster newMonster = MonsterTemplate.Instantiate<Monster>();
         newMonster.GlobalPosition = nearestNode.GlobalPosition;
-        // var enumArray = Enum.GetValues(typeof(Monster.EMonster));
-        // Random rng = new Random ();
-        // newMonster.MonsterType = (Monster.EMonster)enumArray.GetValue(rng.Next(enumArray.Length));
+        var enumArray = Enum.GetValues(typeof(Monster.EMonster));
+        Random rng = new Random ();
+        newMonster.MonsterType = (Monster.EMonster)enumArray.GetValue(rng.Next(enumArray.Length));
         GetParent().AddChild(newMonster);
     }
 }
