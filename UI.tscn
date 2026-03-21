@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c1eu5cwu08qcx"]
+
+[ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid.cs" id="1_3b2b5"]
+[ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://HexNode.cs" id="2_g6l6n"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1099925823]
+
+[node name="Control" type="Control" parent="." unique_id=637561152]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 135.0
+offset_top = 32.0
+offset_right = 175.0
+offset_bottom = 72.0
+
+[node name="Button" type="Button" parent="Control" unique_id=1050790689]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 65.0
+offset_bottom = 19.0
+text = "InputRune"
+
+[node name="LineEdit" type="LineEdit" parent="Control" unique_id=2037432397]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 22.0
+offset_right = 53.5
+offset_bottom = 53.0
+
+[node name="RuneHexGrid" type="Control" parent="." unique_id=319203755]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 250.0
+offset_right = 576.0
+offset_bottom = 324.0
+script = ExtResource("1_3b2b5")
+
+[node name="HexNode" type="Control" parent="RuneHexGrid" unique_id=968749513]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_g6l6n")
+metadata/_edit_group_ = true
