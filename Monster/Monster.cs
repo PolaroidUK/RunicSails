@@ -67,7 +67,7 @@ private void TakeDamage(Arrow arrow)
 	private void Chase(double delta)
 	{
 		Speed = (float)Mathf.Clamp(Speed + Acceleration * delta,0, MaxSpeed);
-		var towardsBoat = GetNode<Node2D>("/root/Node2D/Boat").Position - Position;
+		var towardsBoat = GetNode<Node2D>("../Boat").Position - Position;
 		towardsBoat = towardsBoat.Normalized();
 		Position += (float)(Speed * delta) * towardsBoat;
 	}
