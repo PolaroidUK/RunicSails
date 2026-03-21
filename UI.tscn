@@ -31,9 +31,10 @@ offset_bottom = 53.0
 [node name="RuneHexGrid" type="Control" parent="." unique_id=319203755]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 250.0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_left = 826.0
+offset_top = 324.0
+offset_right = 1152.0
+offset_bottom = 648.0
 script = ExtResource("1_3b2b5")
 
 [node name="HexNode" type="Control" parent="RuneHexGrid" unique_id=968749513]
