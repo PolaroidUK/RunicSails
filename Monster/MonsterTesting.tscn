@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="2_u4jvm"]
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="3_kj5f6"]
 [ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="4_u4jvm"]
-[ext_resource type="PackedScene" uid="uid://c1eu5cwu08qcx" path="res://UI.tscn" id="5_kj5f6"]
+[ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="5_kj5f6"]
 
 [node name="MonsterTesting" type="Node2D" unique_id=152447033]
 
