@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c7kfedb3hao1f"]
 
-[ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid/RuneHexGrid.cs" id="1_3b2b5"]
-[ext_resource type="Script" path="res://GameUI.cs" id="1_g6l6n"]
-[ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://RuneHexGrid/HexNode.cs" id="2_g6l6n"]
+[ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid.cs" id="1_3b2b5"]
+[ext_resource type="Script" uid="uid://b3p8bhkxvw76v" path="res://GameUI.cs" id="1_g6l6n"]
+[ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://HexNode.cs" id="2_g6l6n"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1099925823]
 script = ExtResource("1_g6l6n")
@@ -46,6 +46,83 @@ script = ExtResource("1_3b2b5")
 ui = NodePath("..")
 
 [node name="HexNode" type="Control" parent="RuneHexGrid" unique_id=968749513]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_g6l6n")
+metadata/_edit_group_ = true
+
+[node name="TripleRunePuzzle" type="Control" parent="." unique_id=314232447]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FirstHexGrid" type="Control" parent="TripleRunePuzzle" unique_id=1587883123 node_paths=PackedStringArray("ui")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_top = -648.0
+offset_right = -826.0
+offset_bottom = -324.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_3b2b5")
+ui = NodePath("../..")
+
+[node name="HexNode" type="Control" parent="TripleRunePuzzle/FirstHexGrid" unique_id=442183776]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_g6l6n")
+metadata/_edit_group_ = true
+
+[node name="SecondHexGrid" type="Control" parent="TripleRunePuzzle" unique_id=1415483606 node_paths=PackedStringArray("ui")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -826.0
+offset_top = -648.0
+offset_right = -500.0
+offset_bottom = -324.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_3b2b5")
+ui = NodePath("../..")
+
+[node name="HexNode" type="Control" parent="TripleRunePuzzle/SecondHexGrid" unique_id=124375298]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_g6l6n")
+metadata/_edit_group_ = true
+
+[node name="ThirdHexGrid" type="Control" parent="TripleRunePuzzle" unique_id=419491702 node_paths=PackedStringArray("ui")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -648.0
+offset_right = -174.0
+offset_bottom = -324.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_3b2b5")
+ui = NodePath("../..")
+
+[node name="HexNode" type="Control" parent="TripleRunePuzzle/ThirdHexGrid" unique_id=279870327]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

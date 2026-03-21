@@ -27,6 +27,13 @@ public partial class Boat : CharacterBody2D
 	
 	[Export] public PackedScene arrow;
 	[Export] private GameUI ui;
+	
+	[Export] private AudioStreamPlayer2D lanternSound;
+	[Export] private AudioStreamPlayer2D arrowFireSound;
+	[Export] private AudioStreamPlayer2D sailUpSound;
+	[Export] private AudioStreamPlayer2D crackSound;
+	
+	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -172,6 +179,7 @@ public partial class Boat : CharacterBody2D
 	public void HitSomething(Node2D body)
 	{
 		Speed = 0f;
+		
 	}
 
 	public void Damage(float damage)
