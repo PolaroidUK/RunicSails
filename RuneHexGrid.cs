@@ -408,7 +408,7 @@ public partial class RuneHexGrid : Control
             new LineKey(3, 4)
         );
         _knownPatterns[Runes.South] = CreateMaskFromEdges(
-            new LineKey(3, 4)
+            new LineKey(2, 3)
         );
     }
 
