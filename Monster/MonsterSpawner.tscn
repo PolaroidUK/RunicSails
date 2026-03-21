@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dn602mxxl5dth"]
+
+[ext_resource type="Script" uid="uid://u6hly43sjl7b" path="res://Monster/MonsterSpawner.cs" id="1_qagxr"]
+[ext_resource type="Texture2D" uid="uid://c4rh2ng8752sh" path="res://Monster/Leviathan.png" id="2_ksgyh"]
+[ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="2_ou6ci"]
+
+[node name="MonsterSpawner" type="Node2D" unique_id=56442799]
+script = ExtResource("1_qagxr")
+SpawnDelay = 20.0
+SpawnDelayMin = 10.0
+MonsterTemplate = ExtResource("2_ou6ci")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1651805465]
+position = Vector2(0, -8)
+texture = ExtResource("2_ksgyh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1208268313]
+position = Vector2(-12, 18)
+texture = ExtResource("2_ksgyh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1488488131]
+position = Vector2(21, 18)
+texture = ExtResource("2_ksgyh")

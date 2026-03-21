@@ -177,7 +177,7 @@ public partial class Boat : CharacterBody2D
 	{
 		Arrow newArrow = arrow.Instantiate<Arrow>();
 		newArrow.SetDamage(ArrowDamage);
-		newArrow.SetType(Monster.EMonster.Fish);
+		newArrow.SetType(Monster.EMonster.Arrow);
 		newArrow.GlobalPosition = GlobalPosition;
 		newArrow.Rotation = rotation;
 		GetParent().AddChild(newArrow);

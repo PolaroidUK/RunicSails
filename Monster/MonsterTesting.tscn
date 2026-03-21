@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b3an8a1sxnf0r"]
+
+[ext_resource type="PackedScene" uid="uid://dn602mxxl5dth" path="res://Monster/MonsterSpawner.tscn" id="1_0nt4f"]
+[ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="2_u4jvm"]
+[ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="3_kj5f6"]
+[ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="4_u4jvm"]
+
+[node name="MonsterTesting" type="Node2D" unique_id=152447033]
+
+[node name="MonsterSpawner" parent="." unique_id=56442799 instance=ExtResource("1_0nt4f")]
+position = Vector2(790, 143)
+
+[node name="Boat" parent="." unique_id=1606016725 instance=ExtResource("3_kj5f6")]
+position = Vector2(599, 182)
+
+[node name="SpawnPoint" parent="." unique_id=1335211392 instance=ExtResource("4_u4jvm")]
+position = Vector2(1035, 149)
+
+[node name="SpawnPoint2" parent="." unique_id=1881158443 instance=ExtResource("4_u4jvm")]
+position = Vector2(1345, -156)
+
+[node name="SpawnPoint3" parent="." unique_id=595501236 instance=ExtResource("4_u4jvm")]
+position = Vector2(620, -286)
+
+[node name="SpawnPoint4" parent="." unique_id=1860151061 instance=ExtResource("4_u4jvm")]
+position = Vector2(-255, -76)
+
+[node name="SpawnPoint5" parent="." unique_id=27737200 instance=ExtResource("4_u4jvm")]
+position = Vector2(-233, 615)
+
+[node name="SpawnPoint6" parent="." unique_id=1008250120 instance=ExtResource("4_u4jvm")]
+position = Vector2(543, 821)
+
+[node name="SpawnPoint7" parent="." unique_id=351262653 instance=ExtResource("4_u4jvm")]
+position = Vector2(1153, 799)
+
+[node name="SpawnPoint8" parent="." unique_id=611809643 instance=ExtResource("4_u4jvm")]
+position = Vector2(1976, 351)
+
+[node name="SpawnPoint9" parent="." unique_id=1043134727 instance=ExtResource("4_u4jvm")]
+position = Vector2(215, 204)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=18547447]
+position = Vector2(215, 204)
+points = PackedVector2Array(-961, -812, 2362, -823, 2335, 821, -926, 852)
+closed = true
+
+[node name="Monster" parent="." unique_id=678498706 instance=ExtResource("2_u4jvm")]
+position = Vector2(248, -34)
