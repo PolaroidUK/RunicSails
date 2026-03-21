@@ -124,10 +124,26 @@ func raise_sails() -> bool:
 	if _current_sails_state == SailsState.NO_SAILS:
 		return false
 	_animation_player.play("sails-up")
+	_current_sails_state = SailsState.NO_SAILS
 	return true
 
 func drop_sails() -> bool:
 	if _current_sails_state == SailsState.FULL_SAILS:
 		return false
 	_animation_player.play_backwards("sails-up")
+	_current_sails_state = SailsState.FULL_SAILS
 	return true
+
+func update_visuals( speed: float, lights:bool ):
+	if speed>150:
+		set_sail_pace(SailPace.QUICK)
+	elif speed>25:
+		set_sail_pace(SailPace.SLOW)
+	else:
+		set_sail_pace(SailPace.STILL)
+	
+	if lights:
+		set_lights(LightsState.on)
+	else:
+		set_lights(LightsState.off)
+	return

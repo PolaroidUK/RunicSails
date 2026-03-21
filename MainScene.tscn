@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="3_a814b"]
 [ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="4_uxrcv"]
 [ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="5_p5x2j"]
-[ext_resource type="Script" uid="uid://14ijh8anacth" path="res://Monster.cs" id="6_a814b"]
 [ext_resource type="Script" uid="uid://c2wfdxjlpxnw" path="res://RuneIsland.cs" id="6_hbc2u"]
+[ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="7_5crlr"]
 [ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
 [ext_resource type="Script" uid="uid://bo1x27ftihdx6" path="res://MainIsland.cs" id="8_8xkvn"]
 
@@ -23,9 +23,6 @@ size = Vector2(127, 127)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xkvn"]
 size = Vector2(266, 255)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5crlr"]
-size = Vector2(129, 132)
 
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
@@ -258,21 +255,8 @@ texture = ExtResource("4_uxrcv")
 [node name="Arrow" parent="." unique_id=1017168830 instance=ExtResource("3_a814b")]
 position = Vector2(-97, 7)
 
-[node name="Monster" type="Area2D" parent="." unique_id=467657681]
-position = Vector2(-298, 0.99998474)
-scale = Vector2(0.735, 0.735)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("6_a814b")
-metadata/_edit_group_ = true
-
-[node name="Icon" type="Sprite2D" parent="Monster" unique_id=942928061]
-modulate = Color(1, 0.2784314, 0.18431373, 1)
-texture = ExtResource("4_uxrcv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1931186920]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_5crlr")
+[node name="Monster2" parent="." unique_id=583600090 instance=ExtResource("7_5crlr")]
+position = Vector2(-337, -2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=48547811]
 

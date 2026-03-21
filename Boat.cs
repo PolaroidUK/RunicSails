@@ -10,7 +10,15 @@ public partial class Boat : CharacterBody2D
 	private float wantedDirection;
 	private Vector2 currentDirection = Vector2.Up;
 
-	private bool _sails, _lights, _oars;
+	[Export] public float Health = 100f;
+	[Export] public Color DamageColorMod = new Color(1f, 0f, 0f, 1f);
+	private Color _baseColorMod = new Color(1f, 1f, 1f, 1f);
+	[Export] public float ArrowDamage = 1f;
+	[Export] public Sprite2D Sprite;
+
+	private bool _sails = false;
+	private bool _lights = true;
+	private bool _oars = false;
 
 	[Export] public Node2D Ship;
 	
@@ -37,6 +45,7 @@ public partial class Boat : CharacterBody2D
 		if (Input.IsActionPressed("ui_accept"))
 		{
 			Arrow newArrow = arrow.Instantiate<Arrow>();
+			newArrow.SetDamage(ArrowDamage);
 			newArrow.GlobalPosition = GlobalPosition;
 			newArrow.Rotation = -Mathf.Pi/2 +Rotation;
 			GetParent().AddChild(newArrow);
@@ -65,7 +74,12 @@ public partial class Boat : CharacterBody2D
 					DropSails();
 				}
 				break;
+			case 2:
+				_oars = !_oars;
+				break;
 		}
+		RecalculateSpeed();
+		Ship.Call("update_visuals", Speed, _lights);
 	}
 
 	public void RaiseSails()
@@ -73,12 +87,30 @@ public partial class Boat : CharacterBody2D
 		GD.Print("Raise Sails");
 		Ship.Call("raise_sails");
 	}
+
 	public void DropSails()
 	{
 		GD.Print("Drop Sails");
 		Ship.Call("drop_sails");
 	}
 	
+	private void RecalculateSpeed()
+	{
+		MaxSpeed = 0;
+		Accelaration = 0;
+		if (_oars)
+		{
+			Accelaration += 5f;
+			MaxSpeed = 100.0f;
+		}
+		if (_sails)
+		{
+			Accelaration += 5f;
+			MaxSpeed = 300.0f;
+		}
+
+		
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Rotation = RotateTowardTarget(Rotation, wantedDirection, (float)(rotationSpeed*Speed * delta));
@@ -86,6 +118,7 @@ public partial class Boat : CharacterBody2D
 		Speed = (float)Mathf.Clamp(Speed+Accelaration*delta,0,MaxSpeed);
 		Velocity = currentDirection * Speed;
 		MoveAndSlide();
+		Ship.Call("update_visuals", Speed, _lights);
 	}
 	float RotateTowardTarget(float currentRotation, float targetRotation, float step)
 	{
@@ -104,5 +137,15 @@ public partial class Boat : CharacterBody2D
 	public void HitSomething(Node2D body)
 	{
 		Speed = 0f;
+	}
+
+	public void Damage(float damage)
+	{
+		Health -= damage;
+		CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColorMod, _baseColorMod);
+		if (Health <= 0)
+		{
+			QueueFree();
+		}
 	}
 }
