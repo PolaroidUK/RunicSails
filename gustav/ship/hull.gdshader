@@ -5,9 +5,12 @@ uniform float wave_size = 0.02;
 uniform sampler2D noise_img : repeat_enable;
 uniform float edge_size = 2.;
 
+varying vec4 modulate;
+
 void vertex() {
 	float wave = sin(TIME * wave_speed) * wave_size;
 	VERTEX.y += wave * (1.0 - UV.y) * 100.0;
+	modulate = COLOR;
 }
 
 void fragment() {
@@ -28,5 +31,5 @@ void fragment() {
 	float noise_value = (noise_value_1 + noise_value_2) / 2.0;
 	float foam = smoothstep(0.4, 0.5, noise_value);
 	
-    COLOR = mix(text, vec4(1), edge * foam);
+    COLOR = modulate * mix(text, vec4(1), edge * foam);
 }

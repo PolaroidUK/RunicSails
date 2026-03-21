@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c1x0vfbumkjyk"]
 
 [ext_resource type="Script" uid="uid://14ijh8anacth" path="res://Monster/Monster.cs" id="1_viisk"]
-[ext_resource type="Texture2D" uid="uid://yve10g46xcr0" path="res://icon.svg" id="2_h3emb"]
+[ext_resource type="Texture2D" uid="uid://c4rh2ng8752sh" path="res://Monster/Leviathan.png" id="2_viisk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqjb0"]
-size = Vector2(129, 132)
+size = Vector2(90, 99.333336)
 
 [node name="Monster" type="Area2D" unique_id=678498706 node_paths=PackedStringArray("Sprite")]
 scale = Vector2(1.5, 1.5)
@@ -17,8 +17,9 @@ metadata/_edit_group_ = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1858022793]
 modulate = Color(1, 0.2784314, 0.18431373, 1)
-texture = ExtResource("2_h3emb")
+scale = Vector2(2, 2)
+texture = ExtResource("2_viisk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1204225495]
-position = Vector2(-0.5, 0)
+position = Vector2(5, -7.666668)
 shape = SubResource("RectangleShape2D_mqjb0")

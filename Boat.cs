@@ -48,7 +48,7 @@ public partial class Boat : CharacterBody2D
 		}
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			ShootArrow();
+			ShootArrowBarrage();
 		}
 	}
 
@@ -146,27 +146,40 @@ public partial class Boat : CharacterBody2D
 		{
 			QueueFree();
 		}
-		CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColorMod, _baseColorMod);
+
+		foreach (var node in Ship.GetChildren())
+		{
+			if (node is Sprite2D sprite)
+			{
+				CodeAnimations.DamageBlink(0.2f, 5, sprite, DamageColorMod, _baseColorMod);
+			}
+		}
 	}
 
-	private void ShootArrow()
+
+	private void ShootArrowBarrage()
 	{
 		if (_arrowCooldownTime + ArrowCooldown * 1000 > Time.GetTicksMsec()) return;
-			
+		
 		for (int i = 0; i < BurstAmount; i++)
 		{
-			Arrow newArrow = arrow.Instantiate<Arrow>();
-			newArrow.SetDamage(ArrowDamage);
-			newArrow.SetType(Monster.EMonster.Fish);
-			newArrow.GlobalPosition = GlobalPosition;
 			var rng = new RandomNumberGenerator();
-			// Bagbord
-			//newArrow.Rotation = -Mathf.Pi/2 +Rotation;
-			// Ahead
-			newArrow.Rotation = Rotation + rng.RandfRange(-0.3f, 0.3f);
-			GetParent().AddChild(newArrow);
+			ShootArrow(Rotation - Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f));
 		}
-		
+		for (int i = 0; i < BurstAmount; i++)
+		{
+			var rng = new RandomNumberGenerator();
+			ShootArrow(Rotation + Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f));
+		}
 		_arrowCooldownTime = Time.GetTicksMsec();
+	}
+	private void ShootArrow(float rotation)
+	{
+		Arrow newArrow = arrow.Instantiate<Arrow>();
+		newArrow.SetDamage(ArrowDamage);
+		newArrow.SetType(Monster.EMonster.Fish);
+		newArrow.GlobalPosition = GlobalPosition;
+		newArrow.Rotation = rotation;
+		GetParent().AddChild(newArrow);
 	}
 }
