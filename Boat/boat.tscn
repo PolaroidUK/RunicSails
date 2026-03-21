@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://2b0on40cccq8"]
+
+[ext_resource type="Script" uid="uid://dwnnpacba40nh" path="res://Boat.cs" id="1_reikl"]
+[ext_resource type="PackedScene" uid="uid://by6lsufeojhqm" path="res://arrow.tscn" id="2_wob0g"]
+[ext_resource type="Texture2D" uid="uid://cqbdb0gmnee0u" path="res://boat.png" id="3_57yac"]
+[ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="4_oew0k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
+radius = 26.0
+height = 105.9
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxrcv"]
+size = Vector2(29.49265, 23.662956)
+
+[node name="Boat" type="CharacterBody2D" unique_id=1606016725 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_reikl")
+Sprite = NodePath("Sprite")
+arrow = ExtResource("2_wob0g")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1634597975]
+visible = false
+texture = ExtResource("3_57yac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=162442171]
+position = Vector2(0.245, 5.05)
+shape = SubResource("CapsuleShape2D_rf2cd")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=521570471]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=685532559]
+position = Vector2(3, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1312922251]
+position = Vector2(-1.7099627, -32.71573)
+rotation = 0.82030475
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_uxrcv")
+
+[node name="Ship" parent="." unique_id=616131769 instance=ExtResource("4_oew0k")]
+position = Vector2(0, -1)
+
+[connection signal="body_entered" from="Area2D" to="." method="HitSomething"]

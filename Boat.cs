@@ -26,6 +26,7 @@ public partial class Boat : CharacterBody2D
 	[Export] public Node2D Ship;
 	
 	[Export] public PackedScene arrow;
+	
 	public override void _Process(double delta)
 	{
 		base._Process(delta);

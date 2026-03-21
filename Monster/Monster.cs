@@ -21,7 +21,8 @@ public partial class Monster : Area2D
 		if (body is Arrow arrow)
 		{
 			Health -= arrow.Damage;
-			if (Health <= 0) {
+			if (Health <= 0) 
+			{
 				QueueFree();
 				GD.Print("i die");
 			}
