@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Boat : CharacterBody2D
 {
@@ -11,10 +10,14 @@ public partial class Boat : CharacterBody2D
 	private Vector2 currentDirection = Vector2.Up;
 
 	[Export] public float Health = 100f;
+	[Export] public Sprite2D Sprite;
 	[Export] public Color DamageColorMod = new Color(1f, 0f, 0f, 1f);
 	private Color _baseColorMod = new Color(1f, 1f, 1f, 1f);
-	[Export] public float ArrowDamage = 1f;
-	[Export] public Sprite2D Sprite;
+	
+	[Export] public float ArrowDamage = 25f;
+	[Export] public int BurstAmount = 3;
+	[Export] public float ArrowCooldown = 0.5f;
+	private float _arrowCooldownTime = 0f;
 	
 	[Export] public PackedScene arrow;
 	public override void _Process(double delta)
@@ -36,13 +39,9 @@ public partial class Boat : CharacterBody2D
 		{
 			wantedDirection = 0;
 		}
-		if (Input.IsActionPressed("ui_accept"))
+		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			Arrow newArrow = arrow.Instantiate<Arrow>();
-			newArrow.SetDamage(ArrowDamage);
-			newArrow.GlobalPosition = GlobalPosition;
-			newArrow.Rotation = -Mathf.Pi/2 +Rotation;
-			GetParent().AddChild(newArrow);
+			ShootArrow();
 		}
 	}
 	public override void _PhysicsProcess(double delta)
@@ -75,10 +74,30 @@ public partial class Boat : CharacterBody2D
 	public void Damage(float damage)
 	{
 		Health -= damage;
-		CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColorMod, _baseColorMod);
 		if (Health <= 0)
 		{
 			QueueFree();
 		}
+		CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColorMod, _baseColorMod);
+	}
+
+	private void ShootArrow()
+	{
+		if (_arrowCooldownTime + ArrowCooldown * 1000 > Time.GetTicksMsec()) return;
+			
+		for (int i = 0; i < BurstAmount; i++)
+		{
+			Arrow newArrow = arrow.Instantiate<Arrow>();
+			newArrow.SetDamage(ArrowDamage);
+			newArrow.GlobalPosition = GlobalPosition;
+			var rng = new RandomNumberGenerator();
+			// Bagbord
+			//newArrow.Rotation = -Mathf.Pi/2 +Rotation;
+			// Ahead
+			newArrow.Rotation = Rotation + rng.RandfRange(-0.3f, 0.3f);
+			GetParent().AddChild(newArrow);
+		}
+		
+		_arrowCooldownTime = Time.GetTicksMsec();
 	}
 }

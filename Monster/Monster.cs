@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
 public partial class Monster : Area2D
 {
@@ -10,8 +8,6 @@ public partial class Monster : Area2D
 
     [Export] public Color DamageColor = new Color(1f, 0f, 0f, 1f);
     private Color _baseColor = new Color(1f, 1f, 1f, 1f);
-    
-    private Task[] _blinkTask = new Task[5];
     
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,6 +25,7 @@ public partial class Monster : Area2D
 				QueueFree();
 				GD.Print("i die");
 			}
+			
 			arrow.QueueFree();
 			CodeAnimations.DamageBlink(0.2f, 5, Sprite, DamageColor, _baseColor);
 		}
@@ -37,7 +34,6 @@ public partial class Monster : Area2D
 		{
 			boat.Damage(Damage);
 		}
-		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
