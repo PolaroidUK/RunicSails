@@ -70,8 +70,6 @@ private void TakeDamage(Arrow arrow)
 		var towardsBoat = GetNode<Node2D>("/root/Node2D/Boat").Position - Position;
 		towardsBoat = towardsBoat.Normalized();
 		Position += (float)(Speed * delta) * towardsBoat;
-		// Velocity = currentDirection * Speed;
-		//MoveAndSlide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
