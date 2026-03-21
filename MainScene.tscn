@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://14ijh8anacth" path="res://Monster.cs" id="6_a814b"]
 [ext_resource type="Script" uid="uid://bi8w6b8xvsjed" path="res://HexNode.cs" id="6_hbc2u"]
 [ext_resource type="Script" uid="uid://cg1jvjwk1kn7b" path="res://RuneHexGrid.cs" id="7_5crlr"]
+[ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="5_p5x2j"]
+[ext_resource type="Script" path="res://RuneIsland.cs" id="6_hbc2x"]
+[ext_resource type="PackedScene" uid="uid://c1x0vfbumkjyk" path="res://Monster/Monster.tscn" id="7_5crlx"]
+[ext_resource type="Texture2D" uid="uid://s8atlwtwwvxm" path="res://Screenshot 2026-03-21 133757.png" id="7_torvr"]
+[ext_resource type="Script" path="res://MainIsland.cs" id="8_8xkvn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rf2cd"]
 radius = 26.0
@@ -19,8 +24,8 @@ size = Vector2(29.49265, 23.662956)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a814b"]
 size = Vector2(127, 127)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5crlr"]
-size = Vector2(129, 132)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xkvn"]
+size = Vector2(266, 255)
 
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
@@ -29,11 +34,14 @@ position = Vector2(581, 130)
 scale = Vector2(4.1835938, 3.7690039)
 texture = ExtResource("1_rpqi1")
 
-[node name="Boat" type="CharacterBody2D" parent="." unique_id=483988252]
+[node name="Boat" type="CharacterBody2D" parent="." unique_id=483988252 node_paths=PackedStringArray("Ship", "runeNumberInput")]
 script = ExtResource("2_uxrcv")
+Ship = NodePath("Ship")
 arrow = ExtResource("3_a814b")
+runeNumberInput = NodePath("../CanvasLayer/Control/LineEdit")
 
 [node name="Sprite" type="Sprite2D" parent="Boat" unique_id=1128885094]
+visible = false
 texture = ExtResource("1_3mqji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boat" unique_id=253377539]
@@ -65,6 +73,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_hbc2u")
 metadata/_edit_group_ = true
+[node name="Ship" parent="Boat" unique_id=616131769 instance=ExtResource("5_p5x2j")]
+position = Vector2(0, -1)
 
 [node name="Islands" type="Node2D" parent="." unique_id=1133923920]
 
@@ -77,6 +87,56 @@ shape = SubResource("RectangleShape2D_a814b")
 
 [node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D" unique_id=1438996474]
 texture = ExtResource("4_uxrcv")
+
+[node name="RuneIsland" type="StaticBody2D" parent="Islands" unique_id=851544554 node_paths=PackedStringArray("Area")]
+position = Vector2(137, -192)
+script = ExtResource("6_hbc2x")
+Area = NodePath("Area2D")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/RuneIsland" unique_id=1792610006]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/RuneIsland" unique_id=10492090]
+texture = ExtResource("4_uxrcv")
+
+[node name="Area2D" type="Area2D" parent="Islands/RuneIsland" unique_id=1911131685]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/RuneIsland/Area2D" unique_id=1255675784]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8xkvn")
+
+[node name="Screenshot20260321133757" type="Sprite2D" parent="Islands/RuneIsland/Area2D" unique_id=395951038]
+position = Vector2(-4.0000076, 1)
+scale = Vector2(0.3796296, 0.3762058)
+texture = ExtResource("7_torvr")
+
+[node name="MainIsland" type="StaticBody2D" parent="Islands" unique_id=739237283 node_paths=PackedStringArray("Area")]
+position = Vector2(337, 182)
+script = ExtResource("8_8xkvn")
+Area = NodePath("Area2D")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/MainIsland" unique_id=504980137]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_a814b")
+
+[node name="Icon" type="Sprite2D" parent="Islands/MainIsland" unique_id=225869737]
+texture = ExtResource("4_uxrcv")
+
+[node name="Area2D" type="Area2D" parent="Islands/MainIsland" unique_id=205102273]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Islands/MainIsland/Area2D" unique_id=82161321]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8xkvn")
+
+[node name="Screenshot20260321133757" type="Sprite2D" parent="Islands/MainIsland/Area2D" unique_id=1553722409]
+position = Vector2(-4.0000076, 1)
+scale = Vector2(0.3796296, 0.3762058)
+texture = ExtResource("7_torvr")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Islands" unique_id=215556355]
 position = Vector2(250, -471)
@@ -213,20 +273,33 @@ texture = ExtResource("4_uxrcv")
 [node name="Arrow" parent="." unique_id=1017168830 instance=ExtResource("3_a814b")]
 position = Vector2(-97, 7)
 
-[node name="Monster" type="Area2D" parent="." unique_id=467657681]
-position = Vector2(-298, 0.99998474)
-scale = Vector2(0.735, 0.735)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("6_a814b")
-metadata/_edit_group_ = true
+[node name="Monster2" parent="." unique_id=583600090 instance=ExtResource("7_5crlx")]
+position = Vector2(-337, -2)
 
-[node name="Icon" type="Sprite2D" parent="Monster" unique_id=942928061]
-modulate = Color(1, 0.2784314, 0.18431373, 1)
-texture = ExtResource("4_uxrcv")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=48547811]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1931186920]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_5crlr")
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1752753950]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 135.0
+offset_top = 32.0
+offset_right = 175.0
+offset_bottom = 72.0
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=875865241]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 65.0
+offset_bottom = 19.0
+text = "InputRune"
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control" unique_id=1365668060]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 22.0
+offset_right = 53.5
+offset_bottom = 53.0
 
 [connection signal="body_entered" from="Boat/Area2D" to="Boat" method="HitSomething"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="Boat" method="TakeDebugInput"]
