@@ -6,6 +6,7 @@
 
 [node name="MonsterSpawner" type="Node2D" unique_id=56442799]
 script = ExtResource("1_qagxr")
+SpawnDelayInitial = 10.0
 SpawnDelay = 20.0
 SpawnDelayMin = 10.0
 MonsterTemplate = ExtResource("2_ou6ci")

@@ -26,7 +26,7 @@ ui = NodePath("../CanvasLayer")
 position = Vector2(1035, 149)
 
 [node name="SpawnPoint2" parent="." unique_id=1881158443 instance=ExtResource("4_u4jvm")]
-position = Vector2(1345, -156)
+position = Vector2(1342.035, -156)
 
 [node name="SpawnPoint3" parent="." unique_id=595501236 instance=ExtResource("4_u4jvm")]
 position = Vector2(620, -286)

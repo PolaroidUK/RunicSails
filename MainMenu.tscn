@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c6hdq16ymddxy"]
+
+[ext_resource type="Texture2D" uid="uid://b7cxa582c651c" path="res://Q0yP6.png" id="1_h7a2f"]
+[ext_resource type="PackedScene" uid="uid://c748tjbv2x5qx" path="res://gustav/gustav-pub/Ship.tscn" id="2_qoqlk"]
+[ext_resource type="Script" uid="uid://re3qhylyr652" path="res://MainMenu.cs" id="3_iwfq2"]
+[ext_resource type="PackedScene" uid="uid://0rgypnempnlw" path="res://MainScene.tscn" id="4_qoqlk"]
+
+[node name="MainMenu" type="Node2D" unique_id=1204945336]
+
+[node name="Q0yP6" type="Sprite2D" parent="." unique_id=814419397]
+modulate = Color(0.49747366, 0.49747366, 0.49747366, 1)
+position = Vector2(581, 130)
+scale = Vector2(4.1835938, 3.7690039)
+texture = ExtResource("1_h7a2f")
+
+[node name="Ship" parent="." unique_id=616131769 instance=ExtResource("2_qoqlk")]
+position = Vector2(803, 482)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1681507513]
+position = Vector2(580, 325)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1013624414]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=339422726]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -33.583984
+offset_bottom = 33.583984
+grow_vertical = 2
+script = ExtResource("3_iwfq2")
+MainScene = ExtResource("4_qoqlk")
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=1454688926]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -73.583984
+offset_right = 350.0
+offset_bottom = -23.583984
+grow_vertical = 2
+text = "Play"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control" unique_id=1625371753]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = 6.4160156
+offset_right = 350.0
+offset_bottom = 56.416016
+grow_vertical = 2
+text = "Quit"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1814522244]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -173.0
+offset_top = 37.0
+offset_right = 177.00037
+offset_bottom = 143.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 52
+text = "Runic-Sails"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/Control/Button2" to="CanvasLayer/Control" method="ExitGame"]

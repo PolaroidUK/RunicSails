@@ -49,6 +49,7 @@ public partial class MonsterSpawner : Node2D
         foreach (var node in _spawnNodes)
         {
             if (node.IsOnScreen) continue;
+        
             var distance = node.GlobalPosition.DistanceSquaredTo(_boat.GlobalPosition);
             
             if (nearestDistance < distance) continue;

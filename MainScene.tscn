@@ -224,45 +224,47 @@ shape = SubResource("RectangleShape2D_a814b")
 [node name="Icon" type="Sprite2D" parent="Islands/StaticBody2D13" unique_id=1779515942]
 texture = ExtResource("4_uxrcv")
 
-[node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("11_p5x2j")]
+[node name="SpawnPoints" type="Node" parent="." unique_id=985233547]
+
+[node name="SpawnPoint" parent="SpawnPoints" unique_id=1335211392 instance=ExtResource("10_p5x2j")]
+position = Vector2(-360, -235)
+
+[node name="SpawnPoint2" parent="SpawnPoints" unique_id=89949436 instance=ExtResource("10_p5x2j")]
+position = Vector2(822, -226)
+
+[node name="SpawnPoint3" parent="SpawnPoints" unique_id=486604849 instance=ExtResource("10_p5x2j")]
+position = Vector2(372, -41)
+
+[node name="SpawnPoint4" parent="SpawnPoints" unique_id=459110832 instance=ExtResource("10_p5x2j")]
+position = Vector2(-123, 47)
+
+[node name="SpawnPoint5" parent="SpawnPoints" unique_id=1024422842 instance=ExtResource("10_p5x2j")]
+position = Vector2(296, 439)
+
+[node name="SpawnPoint6" parent="SpawnPoints" unique_id=1272848320 instance=ExtResource("10_p5x2j")]
+position = Vector2(651, 211)
+
+[node name="SpawnPoint7" parent="SpawnPoints" unique_id=948294735 instance=ExtResource("10_p5x2j")]
+position = Vector2(1304, -315)
+
+[node name="SpawnPoint8" parent="SpawnPoints" unique_id=2006032795 instance=ExtResource("10_p5x2j")]
+position = Vector2(1356, 256)
+
+[node name="SpawnPoint9" parent="SpawnPoints" unique_id=1249625615 instance=ExtResource("10_p5x2j")]
+position = Vector2(-555, 539)
+
+[node name="SpawnPoint10" parent="SpawnPoints" unique_id=917205455 instance=ExtResource("10_p5x2j")]
+position = Vector2(-90, -585)
+
+[node name="SpawnPoint11" parent="SpawnPoints" unique_id=1515166381 instance=ExtResource("10_p5x2j")]
+position = Vector2(463, -746)
+
+[node name="SpawnPoint12" parent="SpawnPoints" unique_id=706404216 instance=ExtResource("10_p5x2j")]
+position = Vector2(1131, -773)
+
+[node name="SpawnPoint13" parent="SpawnPoints" unique_id=328219394 instance=ExtResource("10_p5x2j")]
+position = Vector2(897, 551)
 
 [node name="MonsterSpawner" parent="." unique_id=56442799 instance=ExtResource("9_8xkvn")]
 
-[node name="SpawnPoint" parent="MonsterSpawner" unique_id=1335211392 instance=ExtResource("10_p5x2j")]
-position = Vector2(-360, -235)
-
-[node name="SpawnPoint2" parent="MonsterSpawner" unique_id=89949436 instance=ExtResource("10_p5x2j")]
-position = Vector2(822, -226)
-
-[node name="SpawnPoint3" parent="MonsterSpawner" unique_id=486604849 instance=ExtResource("10_p5x2j")]
-position = Vector2(372, -41)
-
-[node name="SpawnPoint4" parent="MonsterSpawner" unique_id=459110832 instance=ExtResource("10_p5x2j")]
-position = Vector2(-123, 47)
-
-[node name="SpawnPoint5" parent="MonsterSpawner" unique_id=1024422842 instance=ExtResource("10_p5x2j")]
-position = Vector2(296, 439)
-
-[node name="SpawnPoint6" parent="MonsterSpawner" unique_id=1272848320 instance=ExtResource("10_p5x2j")]
-position = Vector2(651, 211)
-
-[node name="SpawnPoint7" parent="MonsterSpawner" unique_id=948294735 instance=ExtResource("10_p5x2j")]
-position = Vector2(1304, -315)
-
-[node name="SpawnPoint8" parent="MonsterSpawner" unique_id=2006032795 instance=ExtResource("10_p5x2j")]
-position = Vector2(1356, 256)
-
-[node name="SpawnPoint9" parent="MonsterSpawner" unique_id=1249625615 instance=ExtResource("10_p5x2j")]
-position = Vector2(-555, 539)
-
-[node name="SpawnPoint10" parent="MonsterSpawner" unique_id=917205455 instance=ExtResource("10_p5x2j")]
-position = Vector2(-90, -585)
-
-[node name="SpawnPoint11" parent="MonsterSpawner" unique_id=1515166381 instance=ExtResource("10_p5x2j")]
-position = Vector2(463, -746)
-
-[node name="SpawnPoint12" parent="MonsterSpawner" unique_id=706404216 instance=ExtResource("10_p5x2j")]
-position = Vector2(1131, -773)
-
-[node name="SpawnPoint13" parent="MonsterSpawner" unique_id=328219394 instance=ExtResource("10_p5x2j")]
-position = Vector2(897, 551)
+[node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("11_p5x2j")]
