@@ -1,5 +1,6 @@
 PImage islandHeightMap; //<>//
 PImage islandNormalMap;
+PImage islandSepiaMap;
 float[] heightMap;
 
 int islandWidth = 3200;
@@ -24,6 +25,9 @@ void draw() {
   case '2':
     image = islandNormalMap;
     break;
+  case '3':
+    image = islandSepiaMap;
+    break;
   }
   image(image, 0, 0, width, height);
 }
@@ -35,6 +39,7 @@ void keyPressed() {
     break;
   case '1':
   case '2':
+  case '3':
     viewState = key;
     break;
   case 'p':
@@ -47,17 +52,20 @@ void printIsland() {
   String baseurl = "island-" + hour()+minute()+second();
   islandHeightMap.save(baseurl + "/base.png");
   islandNormalMap.save(baseurl + "/normal.png");
+  islandSepiaMap.save(baseurl + "/sepia.png");
 }
 
 void generateIsland() {
   islandHeightMap = createImage(islandWidth, islandHeight, ARGB);
   islandNormalMap = createImage(islandWidth, islandHeight, ARGB);
+  islandSepiaMap = createImage(islandWidth, islandHeight, ARGB);
   heightMap = new float[islandWidth * islandHeight];
 
   noiseDetail(4, 0.5);
   noiseSeed(floor(random(0, 9000000)));
   generateHeightMap();
   generateNormalMap();
+  generateSepiaMap();
 }
 
 void generateHeightMap() {
@@ -150,4 +158,37 @@ float getHeightAt(int sx, int sy) {
   float c = heightMap[idx];
   if (c < 0) return 0;
   return c;
+}
+
+void generateSepiaMap() {
+  for (int i = 0; i < islandSepiaMap.pixels.length; i++) {
+    // Skip if water (transparent in height map)
+    if (alpha(islandHeightMap.pixels[i]) == 0) {
+      islandSepiaMap.pixels[i] = color(0, 0, 0, 0);
+      continue;
+    }
+
+    float h = constrain(heightMap[i], 0, 1);
+    islandSepiaMap.pixels[i] = colorForSepia(h);
+  }
+}
+
+color colorForSepia(float h) {
+  // Sepia map with vintage navigator look
+  // Creates a natural progression from dark brown (lowlands) to light tan (highlands)
+  
+  color[] sepiaBands = {
+    color(50, 40, 25),      // dark brown - lowest elevations
+    color(101, 78, 56),     // brown - low/mid elevations
+    color(153, 120, 80),    // tan - mid elevations
+    color(180, 150, 100),   // light tan - higher elevations
+    color(200, 170, 130),   // pale tan - peaks
+    color(220, 200, 160)    // light cream - highest peaks
+  };
+  
+  int bandCount = sepiaBands.length;
+  int band = min(floor(h * bandCount), bandCount - 1);
+  color c = sepiaBands[band];
+  
+  return color(red(c), green(c), blue(c), 255);
 }
