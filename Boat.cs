@@ -14,7 +14,7 @@ public partial class Boat : CharacterBody2D
 	[Export] public Sprite2D Sprite;
 	[Export] public Color DamageColorMod = new Color(1f, 0f, 0f, 1f);
 	private Color _baseColorMod = new Color(1f, 1f, 1f, 1f);
-	
+
 	[Export] public float ArrowDamage = 25f;
 	[Export] public int BurstAmount = 3;
 	[Export] public float ArrowCooldown = 0.5f;
@@ -24,20 +24,20 @@ public partial class Boat : CharacterBody2D
 	private bool _oars = false;
 
 	[Export] public Node2D Ship;
-	
+
 	[Export] public PackedScene arrow;
 	[Export] private GameUI ui;
-	
+
 	[Export] private AudioStreamPlayer2D lanternSound;
 	[Export] private AudioStreamPlayer2D arrowFireSound;
 	[Export] private AudioStreamPlayer2D sailUpSound;
 	[Export] private AudioStreamPlayer2D crackSound;
-	
+
 	[Export] private Node2D spawnPoint1;
 	[Export] private Node2D spawnPoint2;
 	[Export] private Node2D spawnPoint3;
 	[Export] private Node2D spawnPoint4;
-	
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -49,7 +49,7 @@ public partial class Boat : CharacterBody2D
 	private void Spawn()
 	{
 		Health = 100f;
-		int i = (int)(GD.Randi()%4);
+		int i = (int)(GD.Randi() % 4);
 		switch (i)
 		{
 			case 0:
@@ -75,11 +75,11 @@ public partial class Boat : CharacterBody2D
 		base._Process(delta);
 		if (Input.IsActionPressed("ui_right"))
 		{
-			wantedDirection = Mathf.Pi/2;
+			wantedDirection = Mathf.Pi / 2;
 		}
 		if (Input.IsActionPressed("ui_left"))
 		{
-			wantedDirection = Mathf.Pi*1.5f;
+			wantedDirection = Mathf.Pi * 1.5f;
 		}
 		if (Input.IsActionPressed("ui_down"))
 		{
@@ -93,7 +93,8 @@ public partial class Boat : CharacterBody2D
 		{
 			ShootArrowBarrage(Monster.EMonster.Arrow);
 		}
-#if TOOLS 
+
+#if TOOLS
 		// Debug rune keys (quick manual activation)
 		if (Input.IsKeyPressed(Key.Kp1)) ActivateRune((int)Runes.Sails);
 		if (Input.IsKeyPressed(Key.Kp2)) ActivateRune((int)Runes.South);
@@ -108,7 +109,7 @@ public partial class Boat : CharacterBody2D
 	}
 
 	[Export] public LineEdit runeNumberInput;
-	
+
 	public void TakeDebugInput()
 	{
 		//ActivateRune(Convert.ToInt32(runeNumberInput.Text));
@@ -116,7 +117,7 @@ public partial class Boat : CharacterBody2D
 	public void ActivateRune(int runeID)
 	{
 		Runes rune = (Runes)runeID;
-		GD.Print("rune made :"+rune);
+		GD.Print("rune made :" + rune);
 		switch (rune)
 		{
 			case Runes.Sails:
@@ -134,7 +135,7 @@ public partial class Boat : CharacterBody2D
 			case Runes.Oars:
 				_oars = !_oars;
 				break;
-			
+
 			case Runes.None:
 				break;
 			case Runes.Arrows:
@@ -154,10 +155,10 @@ public partial class Boat : CharacterBody2D
 				wantedDirection = Mathf.Pi;
 				break;
 			case Runes.East:
-				wantedDirection = Mathf.Pi/2;
+				wantedDirection = Mathf.Pi / 2;
 				break;
 			case Runes.West:
-				wantedDirection = Mathf.Pi*1.5f;
+				wantedDirection = Mathf.Pi * 1.5f;
 				break;
 			case Runes.Fish:
 				ShootArrowBarrage(Monster.EMonster.Fish);
@@ -182,7 +183,7 @@ public partial class Boat : CharacterBody2D
 		Ship.Call("drop_sails");
 		sailUpSound.Play();
 	}
-	
+
 	private void RecalculateSpeed()
 	{
 		MaxSpeed = 0;
@@ -197,17 +198,19 @@ public partial class Boat : CharacterBody2D
 			Accelaration += 10f;
 			MaxSpeed = 100.0f;
 		}
-		
+
 	}
+
 	public override void _PhysicsProcess(double delta)
 	{
-		Rotation = RotateTowardTarget(Rotation, wantedDirection, (float)(rotationSpeed*Speed * delta));
+		Rotation = RotateTowardTarget(Rotation, wantedDirection, (float)(rotationSpeed * Speed * delta));
 		currentDirection = Vector2.Up.Rotated(Transform.Rotation);
-		Speed = (float)Mathf.Clamp(Speed+Accelaration*delta,0,MaxSpeed);
+		Speed = (float)Mathf.Clamp(Speed + Accelaration * delta, 0, MaxSpeed);
 		Velocity = currentDirection * Speed;
 		MoveAndSlide();
 		Ship.Call("update_visuals", Speed, _lights);
 	}
+
 	float RotateTowardTarget(float currentRotation, float targetRotation, float step)
 	{
 		float diff = (targetRotation - currentRotation) % Mathf.Tau;
@@ -245,25 +248,24 @@ public partial class Boat : CharacterBody2D
 		}
 	}
 
-
 	private void ShootArrowBarrage(Monster.EMonster type)
 	{
 		if (_arrowCooldownTime + ArrowCooldown * 1000 > Time.GetTicksMsec()) return;
-		
+
 		for (int i = 0; i < BurstAmount; i++)
 		{
 			var rng = new RandomNumberGenerator();
-			ShootArrow(Rotation - Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f), type);
+			ShootArrow(Rotation - Mathf.Pi / 2 + rng.RandfRange(-0.3f, 0.3f), type);
 		}
 		for (int i = 0; i < BurstAmount; i++)
 		{
 			var rng = new RandomNumberGenerator();
-			ShootArrow(Rotation + Mathf.Pi/2 + rng.RandfRange(-0.3f, 0.3f), type);
+			ShootArrow(Rotation + Mathf.Pi / 2 + rng.RandfRange(-0.3f, 0.3f), type);
 		}
 
 		if (type == Monster.EMonster.Arrow)
 		{
-			
+
 			arrowFireSound.Play();
 		}
 		else
@@ -272,6 +274,7 @@ public partial class Boat : CharacterBody2D
 		}
 		_arrowCooldownTime = Time.GetTicksMsec();
 	}
+
 	private void ShootArrow(float rotation, Monster.EMonster type)
 	{
 		Arrow newArrow = arrow.Instantiate<Arrow>();
