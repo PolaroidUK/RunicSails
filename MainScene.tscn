@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dn602mxxl5dth" path="res://Monster/MonsterSpawner.tscn" id="9_8xkvn"]
 [ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="10_p5x2j"]
 [ext_resource type="Script" uid="uid://dj0nagd7o2dhr" path="res://EndGameArea.cs" id="11_3hf6u"]
-[ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="11_p5x2j"]
+[ext_resource type="PackedScene" uid="uid://c1eu5cwu08qcx" path="res://UI.tscn" id="11_p5x2j"]
 [ext_resource type="AudioStream" uid="uid://drmtce6gq6tg2" path="res://soundeffects/sea.mp3" id="11_yvb8b"]
 [ext_resource type="Texture2D" uid="uid://de7ktoy3m3yjw" path="res://X.png" id="13_mctxq"]
 
@@ -71,45 +71,6 @@ parameters/looping = true
 [node name="MonsterSpawner" parent="." unique_id=56442799 instance=ExtResource("9_8xkvn")]
 position = Vector2(4496, 5705)
 
-[node name="SpawnPoint" parent="MonsterSpawner" unique_id=1335211392 instance=ExtResource("10_p5x2j")]
-position = Vector2(-3243, -1291)
-
-[node name="SpawnPoint2" parent="MonsterSpawner" unique_id=89949436 instance=ExtResource("10_p5x2j")]
-position = Vector2(3777, -1418)
-
-[node name="SpawnPoint3" parent="MonsterSpawner" unique_id=486604849 instance=ExtResource("10_p5x2j")]
-position = Vector2(-987, -1873)
-
-[node name="SpawnPoint4" parent="MonsterSpawner" unique_id=459110832 instance=ExtResource("10_p5x2j")]
-position = Vector2(-727, 1919)
-
-[node name="SpawnPoint5" parent="MonsterSpawner" unique_id=1024422842 instance=ExtResource("10_p5x2j")]
-position = Vector2(1012, 1740)
-
-[node name="SpawnPoint6" parent="MonsterSpawner" unique_id=1272848320 instance=ExtResource("10_p5x2j")]
-position = Vector2(-3469, -3294)
-
-[node name="SpawnPoint7" parent="MonsterSpawner" unique_id=948294735 instance=ExtResource("10_p5x2j")]
-position = Vector2(-1348, 730)
-
-[node name="SpawnPoint8" parent="MonsterSpawner" unique_id=2006032795 instance=ExtResource("10_p5x2j")]
-position = Vector2(3963, -383)
-
-[node name="SpawnPoint9" parent="MonsterSpawner" unique_id=1249625615 instance=ExtResource("10_p5x2j")]
-position = Vector2(2377, -1030)
-
-[node name="SpawnPoint10" parent="MonsterSpawner" unique_id=917205455 instance=ExtResource("10_p5x2j")]
-position = Vector2(1079, -1494)
-
-[node name="SpawnPoint11" parent="MonsterSpawner" unique_id=1515166381 instance=ExtResource("10_p5x2j")]
-position = Vector2(-1263, -2972)
-
-[node name="SpawnPoint12" parent="MonsterSpawner" unique_id=706404216 instance=ExtResource("10_p5x2j")]
-position = Vector2(3137, -2145)
-
-[node name="SpawnPoint13" parent="MonsterSpawner" unique_id=328219394 instance=ExtResource("10_p5x2j")]
-position = Vector2(-3321, 290)
-
 [node name="Islands" parent="." unique_id=1059542999 instance=ExtResource("8_hbc2u")]
 position = Vector2(5148, 5062)
 
@@ -136,3 +97,44 @@ position = Vector2(2067, 6676)
 
 [node name="SpawnPoint4" type="Node2D" parent="." unique_id=421930651]
 position = Vector2(467, 5156)
+
+[node name="Monster Spawnpoints" type="Node" parent="." unique_id=965602885]
+
+[node name="SpawnPoint" parent="Monster Spawnpoints" unique_id=1335211392 instance=ExtResource("10_p5x2j")]
+position = Vector2(1253, 4414)
+
+[node name="SpawnPoint2" parent="Monster Spawnpoints" unique_id=89949436 instance=ExtResource("10_p5x2j")]
+position = Vector2(8273, 4287)
+
+[node name="SpawnPoint3" parent="Monster Spawnpoints" unique_id=486604849 instance=ExtResource("10_p5x2j")]
+position = Vector2(3509, 3832)
+
+[node name="SpawnPoint4" parent="Monster Spawnpoints" unique_id=459110832 instance=ExtResource("10_p5x2j")]
+position = Vector2(3769, 7624)
+
+[node name="SpawnPoint5" parent="Monster Spawnpoints" unique_id=1024422842 instance=ExtResource("10_p5x2j")]
+position = Vector2(5508, 7445)
+
+[node name="SpawnPoint6" parent="Monster Spawnpoints" unique_id=1272848320 instance=ExtResource("10_p5x2j")]
+position = Vector2(1027, 2411)
+
+[node name="SpawnPoint7" parent="Monster Spawnpoints" unique_id=948294735 instance=ExtResource("10_p5x2j")]
+position = Vector2(3148, 6435)
+
+[node name="SpawnPoint8" parent="Monster Spawnpoints" unique_id=2006032795 instance=ExtResource("10_p5x2j")]
+position = Vector2(8459, 5322)
+
+[node name="SpawnPoint9" parent="Monster Spawnpoints" unique_id=1249625615 instance=ExtResource("10_p5x2j")]
+position = Vector2(6873, 4675)
+
+[node name="SpawnPoint10" parent="Monster Spawnpoints" unique_id=917205455 instance=ExtResource("10_p5x2j")]
+position = Vector2(5575, 4211)
+
+[node name="SpawnPoint11" parent="Monster Spawnpoints" unique_id=1515166381 instance=ExtResource("10_p5x2j")]
+position = Vector2(3233, 2733)
+
+[node name="SpawnPoint12" parent="Monster Spawnpoints" unique_id=706404216 instance=ExtResource("10_p5x2j")]
+position = Vector2(7633, 3560)
+
+[node name="SpawnPoint13" parent="Monster Spawnpoints" unique_id=328219394 instance=ExtResource("10_p5x2j")]
+position = Vector2(1175, 5995)
