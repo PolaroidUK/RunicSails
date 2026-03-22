@@ -3,8 +3,8 @@ PImage islandNormalMap;
 PImage islandSepiaMap;
 float[] heightMap;
 
-int islandWidth = 3200;
-int islandHeight = 3200;
+int islandWidth = 4200;
+int islandHeight = 4200;
 
 char viewState = '1';
 
@@ -105,16 +105,16 @@ color colorForHeight(float h) {
     //color(0, 40, 120),    // deep water
     //color(50, 110, 200),  // shallow water
     color(240, 220, 160), // sand
-    color(90, 160, 70),   // grass
-    color(110, 100, 90),  // rock
+    color(90, 160, 70), // grass
+    color(110, 100, 90), // rock
     color(240, 240, 255)  // snow/peak
   };
   int bandCount = bands.length;
   int band = min(floor(h * bandCount), bandCount - 1);
   color c = bands[band];
-  
-  if(h < 0){
-    return color(0,0);
+
+  if (h < 0) {
+    return color(0, 0);
   }
   // ensure fully opaque for land pixels
   return color(red(c), green(c), blue(c), 255);
@@ -176,19 +176,19 @@ void generateSepiaMap() {
 color colorForSepia(float h) {
   // Sepia map with vintage navigator look
   // Creates a natural progression from dark brown (lowlands) to light tan (highlands)
-  
+
   color[] sepiaBands = {
-    color(50, 40, 25),      // dark brown - lowest elevations
-    color(101, 78, 56),     // brown - low/mid elevations
-    color(153, 120, 80),    // tan - mid elevations
-    color(180, 150, 100),   // light tan - higher elevations
-    color(200, 170, 130),   // pale tan - peaks
+    color(50, 40, 25), // dark brown - lowest elevations
+    color(101, 78, 56), // brown - low/mid elevations
+    color(153, 120, 80), // tan - mid elevations
+    color(180, 150, 100), // light tan - higher elevations
+    color(200, 170, 130), // pale tan - peaks
     color(220, 200, 160)    // light cream - highest peaks
   };
-  
+
   int bandCount = sepiaBands.length;
   int band = min(floor(h * bandCount), bandCount - 1);
   color c = sepiaBands[band];
-  
+
   return color(red(c), green(c), blue(c), 255);
 }
