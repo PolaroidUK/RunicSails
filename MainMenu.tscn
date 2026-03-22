@@ -279,7 +279,6 @@ offset_bottom = 33.583984
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_iwfq2")
-MainScene = ExtResource("4_qoqlk")
 
 [node name="Button" type="Button" parent="Camera2D/CanvasLayer/Control" unique_id=1454688926]
 layout_mode = 1

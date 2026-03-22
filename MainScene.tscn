@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://EndGameArea.cs" id="11_3hf6u"]
 [ext_resource type="PackedScene" path="res://UI.tscn" id="11_p5x2j"]
 [ext_resource type="AudioStream" uid="uid://drmtce6gq6tg2" path="res://soundeffects/sea.mp3" id="11_yvb8b"]
-[ext_resource type="PackedScene" path="res://MainMenu.tscn" id="12_4mcbk"]
 [ext_resource type="Texture2D" uid="uid://de7ktoy3m3yjw" path="res://X.png" id="13_mctxq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8xkvn"]
@@ -117,7 +116,6 @@ position = Vector2(-2080, 1058)
 position = Vector2(6930, 6628)
 scale = Vector2(6, 6)
 script = ExtResource("11_3hf6u")
-MainMenu = ExtResource("12_4mcbk")
 
 [node name="X" type="Sprite2D" parent="Area2D" unique_id=221922872]
 texture = ExtResource("13_mctxq")
