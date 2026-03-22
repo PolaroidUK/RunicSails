@@ -88,6 +88,7 @@ public partial class RuneHexGrid : Control
 
         int id = 0;
         Vector2 centerOffset = Size / 2f;
+        centerOffset.Y /= 1.5f;
 
         for (int q = -GridRadius; q <= GridRadius; q++)
         {
@@ -269,9 +270,9 @@ public partial class RuneHexGrid : Control
         Runes matched = FindMatchingPattern(patternMask);
         if (matched != Runes.None)
         {
-            
+
             GD.Print(matched);
-            ui.EmitSignal(GameUI.SignalName.RuneMade,(int)matched);
+            ui.EmitSignal(GameUI.SignalName.RuneMade, (int)matched);
         }
         int[] nodeIds = _selectedPath.Select(x => x.Id).ToArray();
 
@@ -288,6 +289,7 @@ public partial class RuneHexGrid : Control
     {
         float x = size * 1.5f * q;
         float y = size * Mathf.Sqrt(3f) * (r + q / 2f);
+        y *= 1.5f; // Skew grid vertically
         return new Vector2(x, y);
     }
 
