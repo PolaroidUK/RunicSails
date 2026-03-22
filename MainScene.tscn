@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://dj0nagd7o2dhr" path="res://EndGameArea.cs" id="11_3hf6u"]
 [ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="11_p5x2j"]
 [ext_resource type="AudioStream" uid="uid://drmtce6gq6tg2" path="res://soundeffects/sea.mp3" id="11_yvb8b"]
+[ext_resource type="Shader" uid="uid://cim48erx4dchf" path="res://Materials/fog.gdshader" id="13_4mcbk"]
 [ext_resource type="Texture2D" uid="uid://de7ktoy3m3yjw" path="res://X.png" id="13_mctxq"]
+[ext_resource type="Texture2D" uid="uid://dnlkrcbk661bm" path="res://Materials/Perlin 5 - 512x512.png" id="14_mctxq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8xkvn"]
 frequency = 0.2
@@ -30,6 +32,15 @@ shader_parameter/strength = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0cd2"]
 size = Vector2(32.833435, 31.666565)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nm5af"]
+shader = ExtResource("13_4mcbk")
+shader_parameter/speed_u = 0.05
+shader_parameter/speed_v = 0.02
+shader_parameter/speed2_u = -0.03
+shader_parameter/speed2_v = 0.0
+shader_parameter/tiling = 4.0
+shader_parameter/noise_img = ExtResource("14_mctxq")
 
 [node name="Node2D" type="Node2D" unique_id=1844125847]
 
@@ -137,3 +148,11 @@ position = Vector2(7633, 3560)
 
 [node name="SpawnPoint17" parent="SpawnPoints" unique_id=328219394 instance=ExtResource("10_p5x2j")]
 position = Vector2(2416, 6763)
+
+[node name="Fog" type="Sprite2D" parent="." unique_id=538440809]
+modulate = Color(0.2901961, 0, 0.9882353, 0.7764706)
+material = SubResource("ShaderMaterial_nm5af")
+position = Vector2(5350, 5690)
+scale = Vector2(22.57324, 22.57324)
+texture = ExtResource("14_mctxq")
+region_rect = Rect2(0, 0, 1.07, 1.365)

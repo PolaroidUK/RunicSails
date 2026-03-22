@@ -6,6 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://2b0on40cccq8" path="res://Boat/boat.tscn" id="3_kj5f6"]
 [ext_resource type="PackedScene" uid="uid://b3p2p3afn7dpf" path="res://Monster/SpawnPoint.tscn" id="4_u4jvm"]
 [ext_resource type="PackedScene" uid="uid://c7kfedb3hao1f" path="res://UI.tscn" id="5_kj5f6"]
+[ext_resource type="Shader" uid="uid://cim48erx4dchf" path="res://Materials/fog.gdshader" id="7_4w2h8"]
+[ext_resource type="Texture2D" uid="uid://dnlkrcbk661bm" path="res://Materials/Perlin 5 - 512x512.png" id="7_ngsj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vk4op"]
+shader = ExtResource("7_4w2h8")
+shader_parameter/speed_u = 0.05
+shader_parameter/speed_v = 0.02
+shader_parameter/speed2_u = -0.03
+shader_parameter/speed2_v = 0.0
+shader_parameter/tiling = 1.0
+shader_parameter/noise_img = ExtResource("7_ngsj0")
 
 [node name="MonsterTesting" type="Node2D" unique_id=152447033]
 
@@ -58,3 +69,11 @@ closed = true
 position = Vector2(248, -34)
 
 [node name="CanvasLayer" parent="." unique_id=1099925823 instance=ExtResource("5_kj5f6")]
+
+[node name="Fog" type="Sprite2D" parent="." unique_id=1102997828]
+modulate = Color(0.20444739, 0.00031135784, 0.5501899, 0.8627451)
+material = SubResource("ShaderMaterial_vk4op")
+position = Vector2(743, -5.000004)
+scale = Vector2(6.8339844, 6.8339844)
+texture = ExtResource("7_ngsj0")
+region_rect = Rect2(0, 0, 1.07, 1.365)
