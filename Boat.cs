@@ -93,7 +93,18 @@ public partial class Boat : CharacterBody2D
 		{
 			ShootArrowBarrage(Monster.EMonster.Arrow);
 		}
-		
+#if TOOLS 
+		// Debug rune keys (quick manual activation)
+		if (Input.IsKeyPressed(Key.Kp1)) ActivateRune((int)Runes.Sails);
+		if (Input.IsKeyPressed(Key.Kp2)) ActivateRune((int)Runes.South);
+		if (Input.IsKeyPressed(Key.Kp3)) ActivateRune((int)Runes.Lights);
+		if (Input.IsKeyPressed(Key.Kp4)) ActivateRune((int)Runes.West);
+		if (Input.IsKeyPressed(Key.Kp5)) ActivateRune((int)Runes.Arrows);
+		if (Input.IsKeyPressed(Key.Kp6)) ActivateRune((int)Runes.East);
+		if (Input.IsKeyPressed(Key.Kp7)) ActivateRune((int)Runes.Fish);
+		if (Input.IsKeyPressed(Key.Kp8)) ActivateRune((int)Runes.North);
+		if (Input.IsKeyPressed(Key.Kp9)) ActivateRune((int)Runes.Oars);
+#endif
 	}
 
 	[Export] public LineEdit runeNumberInput;
