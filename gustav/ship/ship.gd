@@ -126,7 +126,7 @@ func set_sail_pace(pace: SailPace, force: bool = false) -> bool:
 	_mm.set_shader_parameter("wave_speed", _mast_params.wave_speed)
 	_mm.set_shader_parameter("wave_size", _mast_params.wave_size)
 	
-	camera_2d.set_zoom_smooth(camera_zoom[pace])
+	#camera_2d.set_zoom_smooth(camera_zoom[pace])
 	
 	_current_sail_pace = pace
 	return true
