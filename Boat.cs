@@ -33,11 +33,41 @@ public partial class Boat : CharacterBody2D
 	[Export] private AudioStreamPlayer2D sailUpSound;
 	[Export] private AudioStreamPlayer2D crackSound;
 	
+	[Export] private Node2D spawnPoint1;
+	[Export] private Node2D spawnPoint2;
+	[Export] private Node2D spawnPoint3;
+	[Export] private Node2D spawnPoint4;
 	
 	public override void _Ready()
 	{
 		base._Ready();
 		ui.RuneMade += ActivateRune;
+		Spawn();
+		GD.Randi();
+	}
+
+	private void Spawn()
+	{
+		Health = 100f;
+		int i = (int)(GD.Randi()%4);
+		switch (i)
+		{
+			case 0:
+				Position = spawnPoint1.Position;
+				break;
+			case 1:
+				Position = spawnPoint2.Position;
+				break;
+			case 2:
+				Position = spawnPoint3.Position;
+				break;
+			case 3:
+				Position = spawnPoint4.Position;
+				break;
+			default:
+				Position = spawnPoint1.Position;
+				break;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -184,7 +214,7 @@ public partial class Boat : CharacterBody2D
 	public void HitSomething(Node2D body)
 	{
 		Speed = 0f;
-		
+
 	}
 
 	public void Damage(float damage)
@@ -192,7 +222,7 @@ public partial class Boat : CharacterBody2D
 		Health -= damage;
 		if (Health <= 0)
 		{
-			QueueFree();
+			Spawn();
 		}
 
 		foreach (var node in Ship.GetChildren())

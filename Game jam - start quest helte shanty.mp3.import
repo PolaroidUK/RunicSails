@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://fca8ubc6jaj2"
+path="res://.godot/imported/Game jam - start quest helte shanty.mp3-0fa9dd3ac8750c630ece4597e0abf7d9.mp3str"
+
+[deps]
+
+source_file="res://Game jam - start quest helte shanty.mp3"
+dest_files=["res://.godot/imported/Game jam - start quest helte shanty.mp3-0fa9dd3ac8750c630ece4597e0abf7d9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

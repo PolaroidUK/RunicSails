@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kq53vgbd3wt0"
+path="res://.godot/imported/Game jam - B side helte shanty.mp3-62b8e7c9ea32479819b5723285407d03.mp3str"
+
+[deps]
+
+source_file="res://Game jam - B side helte shanty.mp3"
+dest_files=["res://.godot/imported/Game jam - B side helte shanty.mp3-62b8e7c9ea32479819b5723285407d03.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
