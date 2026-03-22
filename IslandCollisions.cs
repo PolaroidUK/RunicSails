@@ -41,7 +41,7 @@ public partial class IslandCollisions : Node2D
 
         foreach (var polygon in polygons)
         {
-            DrawPolygon(polygon, [Colors.Red]);
+            // DrawPolygon(polygon, [Colors.Red]);
         }
     }
 }
