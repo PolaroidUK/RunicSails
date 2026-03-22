@@ -6,6 +6,8 @@ class_name Ship
 @onready var _sail: Sprite2D = $sail
 @onready var _mast: Sprite2D = $mast
 @onready var _torches: Node2D = $torches
+@onready var boat: CharacterBody2D = $".."
+@onready var camera_2d: Camera2D = $"../Camera2D"
 
 ## Ohoy Mate'y. A ship. Aye.
 ##
@@ -52,6 +54,13 @@ var _bubbles_amount = {
 		"wave_size": 0.02,
 	}
 }
+
+@onready var camera_zoom = {
+	SailPace.STILL: 1.83,
+	SailPace.SLOW: 1.5,
+	SailPace.QUICK: 1.3,
+}
+
 @onready var _sail_shader_params = {
 	SailPace.STILL: {
 		"sway_speed": 2.0,
@@ -116,6 +125,8 @@ func set_sail_pace(pace: SailPace, force: bool = false) -> bool:
 	_mm.set_shader_parameter("sway_amount", _mast_params.sway_amount)
 	_mm.set_shader_parameter("wave_speed", _mast_params.wave_speed)
 	_mm.set_shader_parameter("wave_size", _mast_params.wave_size)
+	
+	camera_2d.set_zoom_smooth(camera_zoom[pace])
 	
 	_current_sail_pace = pace
 	return true
